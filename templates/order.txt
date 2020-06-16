@@ -1,0 +1,9 @@
+Good day, I am  {{ email }}.
+
+My phone number is {{mobile}}.
+
+I am checking my order status. Please contact me soon!
+
+Thank you!
+
+-reply to: {{email}}

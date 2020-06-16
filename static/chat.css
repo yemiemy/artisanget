@@ -1,0 +1,64 @@
+.card-body .messages {
+  height: auto;
+  min-height: calc(100% - 93px);
+  max-height: calc(100% - 93px);
+  overflow-y: scroll;
+  overflow-x: hidden;
+  width: 100%;
+}
+@media screen and (max-width: 735px) {
+  .card-body .messages {
+    max-height: calc(100% - 105px);
+  }
+}
+.card-body .messages::-webkit-scrollbar {
+  width: 8px;
+  background: transparent;
+}
+.card-body .messages::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.card-body .messages ul li {
+  display: inline-block;
+  clear: both;
+  float: left;
+  margin: 15px 15px 5px 15px;
+  width: calc(100% - 25px);
+  font-size: 0.9em;
+}
+.card-body .messages ul li:nth-last-child(1) {
+  margin-bottom: 20px;
+}
+.card-body .messages ul li.sent img {
+  margin: 6px 8px 0 0;
+}
+.card-body .messages ul li.sent p {
+  background: #435f7a;
+  color: #f5f5f5;
+}
+.card-body .messages ul li.replies img {
+  float: right;
+  margin: 6px 0 0 8px;
+}
+.card-body .messages ul li.replies p {
+  background: #f5f5f5;
+  float: right;
+}
+.card-body .messages ul li img {
+  width: 42px;
+  border-radius: 50%;
+  float: left;
+}
+.card-body .messages ul li p {
+  display: inline-block;
+  padding: 10px 15px;
+  border-radius: 20px;
+  max-width: 300px;
+  line-height: 130%;
+  font-size: 18px;
+}
+@media screen and (min-width: 735px) {
+  .card-body .messages ul li p {
+    max-width: 300px;
+  }
+}

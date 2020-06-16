@@ -1,0 +1,110 @@
+{% extends 'profile.html' %}
+
+{% block title %}
+  User Profile
+{% endblock title %}
+
+
+{% block status %}
+active
+{% endblock status %}
+
+
+{% block top %}
+  Track Service Status
+{% endblock top %}
+  
+  
+
+{% block content %}
+  {% load static %}
+  {% load crispy_forms_tags %}
+      <div class="content">
+        <div class="row">
+          {% include 'alerts.html' %}
+          <div class="col-md-8">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="title">Order Look Up</h5>
+              </div>
+              <div class="card-body">
+                <form method="POST" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  <div class="row">
+                    <div class="col-md-4 pr-md-1">
+                      <div id="div_id_username" class="form-group"> <label for="id_username" class=" requiredField">
+                       Name<span class="asteriskField">*</span> </label> 
+                   <input type="text" name="name" value="{{user.first_name}} {{user.last_name}}" placeholder="full name" maxlength="120" class="textinput textInput form-control" required="" id="id_username">
+                   <small id="hint_id_username" class="form-text text-muted">Required. 120 characters or fewer. Letters, digits and @/./+/-/_ only.</small>
+                 </div>
+               </div> 
+                    <div class="col-md-5 pl-md-1">
+                    <div id="div_id_email" class="form-group"> <label for="id_email" class="">
+                      Email address
+                    </label>
+                        <input type="email" name="email" value="{{user.email}}" placeholder="yourname@example.com" maxlength="254" class="emailinput form-control" id="id_email"> 
+                      </div>
+                    </div>
+                    <div class="col-md-3 pl-md-1"> 
+                      <div id="div_id_phone" class="form-group">
+                        <label for="id_phone" class=" requiredField">Phone number </label>
+                        <input type="tel" name="mobile" value="{{user.profile.phone}}" class="form-control" id="id_phone">
+                    </div>
+                  </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-5 pr-md-1"> 
+                      <div id="div_id_phone" class="form-group">
+                        <label for="id_order" class=" requiredField">Your Order ID </label>
+                        <input type="digit" name="order_id" class="form-control" id="id_order">
+                    </div>
+                  </div>
+                  </div>
+                  <div class="card-footer">
+                    <button type="submit" class="btn btn-fill btn-primary">Track</button>
+                  </div>
+                </form>
+              </div>
+              
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card card-user">
+              <div class="card-body">
+                <p class="card-text">
+                  <div class="author">
+                    <div class="block block-one"></div>
+                    <div class="block block-two"></div>
+                    <div class="block block-three"></div>
+                    <div class="block block-four"></div>
+                    <a href="javascript:void(0)">
+                      <img class="avatar" src=" {{user.profile.image.url}} " alt="profile_img">
+                      <h5 class="title">{{user.first_name}} {{ user.last_name }}</h5>
+                    </a>
+                    <p class="description">
+                      {{user.email}}
+                    </p>
+                  </div>
+                </p>
+                <div class="card-description" style="text-align: center;">
+                  {{user.profile.about_me}}
+                </div>
+              </div>
+              <div class="card-footer">
+                <div class="button-container">
+                  <button href="javascript:void(0)" class="btn btn-icon btn-round btn-facebook">
+                    <i class="fab fa-facebook"></i>
+                  </button>
+                  <button href="javascript:void(0)" class="btn btn-icon btn-round btn-twitter">
+                    <i class="fab fa-twitter"></i>
+                  </button>
+                  <button href="javascript:void(0)" class="btn btn-icon btn-round btn-google">
+                    <i class="fab fa-google-plus"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+ {% endblock content %}

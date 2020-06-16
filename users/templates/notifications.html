@@ -1,0 +1,79 @@
+{% extends 'profile.html' %}
+
+{% block title %}
+  Notifications
+{% endblock title %}
+
+{% block not %}
+  active
+{% endblock not %}
+
+{% block top %}
+  Notifications
+{% endblock top %}
+
+{% block content %}
+  
+{% load humanize %}
+  
+  
+  
+  
+      <div class="content">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-header">
+                <h4 class="card-title">Notifications</h4>
+              </div>
+              <div class="card-body">
+                  <!--NOTIFICATION FOR ALL ORDERS-->
+                {% for object in orders %}
+                {% if object %}
+                <div class="alert alert-success alert-with-icon" data-notify="container">
+                  <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
+                    <i class="tim-icons icon-simple-remove"></i>
+                  </button>
+                  <span data-notify="icon" class="tim-icons icon-bell-55"></span>
+                  <span data-notify="message">Your Order with <b>Order ID {{object.order_id}}</b> has been placed successfully. This order was made {{ object.date_stamp|naturaltime }}.</span>
+                </div>
+                {% endif %}
+                {% endfor %}
+                <!--NOTIFICATION FOR COMPLETED ORDERS -->
+                {% for object in orders %}
+                {% if object.completed == True %}
+                  <div class="alert alert-success alert-with-icon" data-notify="container">
+                    <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
+                      <i class="tim-icons icon-simple-remove"></i>
+                    </button>
+                    <span data-notify="icon" class="tim-icons icon-check-2"></span>
+                    <span data-notify="message"><b> Success - </b> Your Order with <b>Order ID {{object.order_id}}</b> has been completed. {{object.date_stamp|naturaltime}}</span>
+                  </div>
+                  {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-header">
+                <h4 class="card-title">Notifications on Processed Order</h4>
+              </div>
+              <div class="card-body">
+                {% for object in orders %}
+                {% if object.processing == True %}
+                <div class="alert alert-info alert-with-icon" data-notify="container">
+                  <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="Close">
+                    <i class="tim-icons icon-simple-remove"></i>
+                  </button>
+                  <span data-notify="icon" class="tim-icons icon-bell-55"></span>
+                  <span data-notify="message">Your order with <b>Order ID {{ object.order_id }}</b> is being processed. <small><i>{{object.date_stamp|naturaltime}}</i></small> </span>
+                </div>
+                {% endif %}
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endblock content %}

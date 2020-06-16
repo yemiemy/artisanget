@@ -1,0 +1,12 @@
+Good day, I am  {{ name }}.
+
+I need {{service}} at {{address}}. My phone number is {{mobile}}.
+
+I stay around {{city}}, {{state}}. {% if accept_term %} I have accepted the terms and conditions{% endif %}.
+
+Find Job Description below:
+{{description}}
+
+Thank you!
+
+-reply to: {{email}}

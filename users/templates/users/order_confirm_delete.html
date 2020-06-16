@@ -1,0 +1,41 @@
+{% extends "profile.html" %}
+
+
+{% block title %}Delete Order{% endblock %}
+
+{% block top %}
+  Delete Order
+{% endblock top %}
+{% block content %}
+
+<div class="content">
+  {% include 'alerts.html' %}
+    <div class="row">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="title">Delete Order</h5>
+            <p class="color-black-opacity-5"> 
+              
+              Are you sure you want to delete the order with Order ID <strong>"{{object.order_id}}"</strong>?</p>
+          </div>
+          <div class="card-body">
+            <form method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+              <div class="row">
+                <div class="col-md-12">
+                  <input type="submit" value="Yes, Delete" class="btn btn-danger btn-md text-white"> 
+                  <a href="{% url 'dashboard' %}" class="btn btn-secondary btn-md text-white"> Cancel
+                    </a>
+                </div>
+              </div>
+            </form>
+          </div>
+          
+        </div>
+      </div>
+    
+      </div>
+    </div>
+
+{% endblock %}

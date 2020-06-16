@@ -1,0 +1,38 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<!-- //header -->
+	<div class="banner-bg2">
+		<div class="banner-info bg3 inner">
+				<h3>one click repair service</h3>
+				<p>repair.&nbsp;improve.&nbsp;maintain</p>
+			</div>
+</div>
+	<!-- breadcrumbs -->
+	<div class="breadcrumbs-w3l">
+		<div class="container">
+			<span class="breadcrumbs">
+				<a href="index.html">Home</a> |
+				<span>Privacy</span>
+			</span>
+		</div>
+	</div>
+	<!-- privacy policy -->
+	<div class="container">
+		<div class="w3ls-section privacy">
+			<h4 class="main-title">privacy policy</h4>
+		{% for object in privacy %}
+			{{object.body|safe}}
+		{% endfor %}
+</div>
+<!--//privacy policy-->
+	</div>
+		<!-- //Terms of use-section -->
+<!-- footer -->
+{% endblock %}

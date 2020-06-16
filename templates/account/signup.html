@@ -1,0 +1,116 @@
+{% extends 'ext.html' %}
+
+{% block title %}
+  Sign Up
+{% endblock title %}
+
+
+{% block active %}
+active
+{% endblock active %}
+
+
+{% block top %}
+  Sign Up
+{% endblock top %}
+  
+{% load i18n %} 
+
+{% block content %}
+  {% load static %}
+  {% load crispy_forms_tags %}
+      <div class="content">
+        {% include 'alerts.html' %}
+        <div class="row">
+          <div class="col-md-8">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="title">Sign Up</h5>
+              </div>
+              <div class="card-body">
+                <form method="POST" action="{% url 'account_signup' %}" enctype="multipart/form-data">
+                  {% if form.errors %}
+                  {% for field in form %}
+                  {% for error in field.errors %}
+                  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <span> {{error}} <span>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                  </div>
+                  {% endfor %}
+                  {% endfor %}
+                  {% for error in form.non_field_errors %}
+                  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <span> {{error | escape}} <span>
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                  </div>
+                  {% endfor %}
+                  {% endif %}
+                  {% csrf_token %}
+                  <div class="row">
+                    <div class="col-md-6 pr-md-1">
+
+                        <div id="div_id_first_name" class="form-group"> 
+                          <label for="id_first_name" class=" contact-form-text requiredField">First name
+                          </label> 
+                          <input type="text" name="first_name" maxlength="30" class="textinput textInput form-control" required="" id="id_first_name"> 
+                        </div>
+                      </div>
+
+                    <div class="col-md-6 px-md-1"> 
+                      <div id="div_id_last_name" class="form-group"> 
+                        <label for="id_last_name" class=" contact-form-text requiredField">Last name </label> 
+                          <input type="text" name="last_name" maxlength="30" class="textinput textInput form-control" required="" id="id_last_name"> 
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 pr-md-1">
+                      <div id="div_id_username" class="form-group"> <label for="id_username" class=" requiredField">
+                        Username<span class="asteriskField">*</span> </label> 
+                        <input class="form-control" type="text" name="username" placeholder="Username" autofocus="autofocus" minlength="1" maxlength="150" required="" id="id_username">
+                        <small id="hint_id_username" class="form-text text-muted">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</small>
+                      </div>
+                    </div>
+                    <div class="col-md-6 pl-md-1">
+                        <label class="contact-form-text" for="id_email">E-mail</label> 
+                        <input class="form-control" type="email" name="email" placeholder="E-mail address" required id="id_email">
+                    
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 pr-md-1">
+                        <label class="contact-form-text" for="id_password1">Password</label> 
+                        <input class="form-control" type="password" name="password1" placeholder="Password" required="" id="id_password1">
+                      
+                    </div>
+
+                    <div class="col-md-6 pl-md-1">
+                      <label class="contact-form-text" for="id_password2">Confirm Password</label>
+                      <input class="form-control" type="password" name="password2" placeholder="Password (again)" required="" id="id_password2">
+                    </div>
+                  </div>
+                  
+                  {% if redirect_field_value %}
+                  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                  {% endif %}
+                  <div class="card-footer">
+                    <button type="submit" class="btn btn-fill btn-primary">Sign Up</button>
+                  </div>
+                  <span style="color: #fff;">
+                    Already have an account? Then please
+                  </span>
+                  <a href="{{ login_url }}" class="txt2">
+                    sign in
+                  </a>.
+                </form>
+              </div>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+ {% endblock content %}

@@ -1,0 +1,9 @@
+Good day, I am  {{ name }}.
+
+My name is {{name}}.
+
+{{message}}
+
+Thank you!
+
+-reply to: {{email}}

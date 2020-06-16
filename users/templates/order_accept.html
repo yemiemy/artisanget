@@ -1,0 +1,71 @@
+{% extends 'profile.html' %}
+
+{% block title %}
+  User Profile
+{% endblock title %}
+
+
+{% block active %}
+active
+{% endblock active %}
+
+
+{% block top %}
+  {{user.first_name}}'s Profile
+{% endblock top %}
+  
+{% load humanize %}
+
+{% block content %}
+  {% load static %}
+  {% load crispy_forms_tags %}
+      <div class="content">
+        {% include 'alerts.html' %}
+        <div class="row">
+          <div class="col-md-8">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="title">Customer Details</h5>
+              </div>
+              <div class="card-body">
+                {% if object.completed %}
+                <div class="title">
+                  Order has already been completed by {{object.completed_by.first_name}}.
+                </div>
+                {% else %}
+                        <h4><strong>CUSTOMER NAME: </strong><small style="font-size: 14px;">{{object.name}}</small></h4>
+                        <h4><strong>CUSTOMER E-MAIL: </strong><small style="font-size: 14px;">{{object.email}}</small></h4>
+                        <h4><strong>CUSTOMER PHONE NO.: </strong><small style="font-size: 14px;">{{object.mobile}}</small></h4>
+                        <h4><strong>CUSTOMER ADDRESS: </strong><small style="font-size: 14px;">{{object.address}}, {{object.city}},
+                        {{object.state}}</small></h4> 
+                        <h4><strong>SERVICE NEEDED: </strong><small style="font-size: 14px;">{{object.service}}</small></h4>
+                        <h4><strong>SERVICE DESCRIPTION: </strong><small style="font-size: 14px;">
+                          
+                          {% if object.description %}
+                          {{object.description}}</small></h4>
+                          {% else %}
+                            
+                          None</small></h4>
+                          {% endif %}
+                        <hr>
+                        <a href="tel://{{object.mobile}}" class="btn btn-fill btn-primary">Call Customer</a> <a href="{% url 'chat' object.user.username %}" class="btn btn-fill btn-primary">Send a Message</a> 
+                        <br>
+                        <hr>
+                        <small class="text-muted">How much did you charge the customer for Labour?</small>
+                        <form method="POST">
+                          {% csrf_token %}
+                          <div class="row">
+                            <div class="col-md-12">
+                              <input type="number" name="price" min="2" max="90000000" class="textinput form-control" required="" >
+                            </div>
+                          </div>
+                          <small class="text-muted">Click here if you have completed the order.</small>
+                          <button type="submit" class="btn btn-fill btn-primary">Completed Order</button>
+                        </form>
+                        {% endif %}
+              </div>  
+            </div>
+          </div>
+        </div>
+      </div>
+ {% endblock content %}

@@ -1,0 +1,307 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	{% if title %}
+	<title>ArtisanGet | {{ title }}</title>
+	{% else %}
+	<title>Artisan</title>
+	{% endif %}
+	<!-- for-mobile-apps -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<!-- google webmaster -->
+	<meta name="google-site-verification" content="XHZ1Y_p-rCMb8vBfV2OxM7saiZPWmqfStWdSKW5xswo" />
+	
+	<meta name="keywords" content="ArtisanGet - one stop easy service providers. Electrical services, plumbing services, carpentry, furniture making,
+	very good and affordable artisans, artisans next door, friendly artisans, professional artisans, service providers,
+	artisan company, service provider company" />
+
+	<!--LINK TO MANIFEST (FOR PWA)-->
+	<link rel="manifest" href="{% static 'manifest.webmanifest' %}">
+	<script> 
+		addEventListener("load", function () {
+			setTimeout(hideURLbar, 0);
+		}, false);
+
+		function hideURLbar() {
+			window.scrollTo(0, 1);
+		}
+	</script>
+
+						<!-- Begin Mailchimp Signup Form -->
+	<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: false">
+	</script>
+	<script type="text/javascript">window.dojoRequire(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us4.list-manage.com","uuid":"4ed2e23db6c7282b0c7794bdd","lid":"84bbf98b8a","uniqueMethods":true}) });
+	</script>
+
+
+	<script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/4ed2e23db6c7282b0c7794bdd/f9c154e25b4d19c92a7de4c2f.js");</script>
+
+	<!-- //favicons -->
+	<link href="{% static "images/artisanget.png" %}" rel="icon">
+	<!-- //for-mobile-apps -->
+	<link href=" {% static "css/bootstrap.css" %} " rel="stylesheet" type="text/css" media="all" />	
+	<link href=" {% static "css/bootstrap.min.css" %} " rel="stylesheet" type="text/css" media="all" />	
+	<!--banner slider  -->
+	<link href=" {% static "css/JiSlider.css" %} " rel="stylesheet">
+	<!-- //banner-slider -->
+	<link href=" {% static "css/font-awesome.css" %} " rel="stylesheet" type="text/css" media="all" />
+	<link href=" {% static "css/style.css" %} " rel="stylesheet" type="text/css" media="all" />
+	<link href="//fonts.googleapis.com/css?family=Noto+Serif:400,400i,700,700i" rel="stylesheet">
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900,900i" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+	<script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/4ed2e23db6c7282b0c7794bdd/dd3f54e64d46c62cae15914f5.js");</script>
+
+</head>
+
+<body>
+	<!-- header -->
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		 <a class="navbar-brand" href="{% url 'home' %}">
+		    <img src="{% static "images/artisanget1.png" %}" width="45" height="62" alt="">
+		  </a>
+	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+	    <span class="navbar-toggler-icon"></span>
+	  </button>
+	  <div class="collapse navbar-collapse" id="navbarNav">
+	    <ul class="navbar-nav">
+	      <li class="nav-item">
+	        <a class="nav-link" href="{% url 'home' %}"><strong>Home</strong></a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="{% url 'about' %}"><strong>About Us</strong> </a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="{% url 'status' %}"><strong>Track Service Status</strong> </a>
+	      </li>
+	      <li class="nav-item">
+	        <a class="nav-link" href="{% url 'contact' %}"><strong>Contact Us</strong> </a>
+		  </li>
+		  {% if user.is_authenticated %}
+		  <li class="nav-item">
+	        <a class="nav-link" href="{% url 'dashboard' %}"><strong>Hi, {{user.username}}</strong> </a>
+		  </li>
+		  <li class="nav-item">
+	        <a class="nav-link" href="{% url 'account_logout' %}"><strong>Log out</strong> </a>
+		  </li>
+		  {% else %}
+		  <li class="nav-item">
+	        <a class="nav-link" href="{% url 'account_signup' %}"><strong>Register</strong> </a>
+		  </li>
+		  <li class="nav-item">
+	        <a class="nav-link" href="{% url 'account_login' %}"><strong>Log in</strong> </a>
+		  </li>
+		  {% endif %}
+	    </ul>
+	  </div>
+	</nav>
+	<!-- //header -->
+{% include 'alerts.html' %}
+{% block content %}
+
+{% endblock %}
+	<!-- footer -->
+	<div class="footer-main-w3_agile">
+		<div class="footer-dot">
+			<div class="container">
+				<div class="container">
+				<div class="footer-bottom">
+					<div class="col-md-4 col-sm-6 col-xs-6 footer-grid1 address">
+						<h4>Contact Info</h4>
+						<ul style="list-style-type: none; padding-left:0;" >
+							<li>
+								<span class="fa fa-home" aria-hidden="true"></span>
+								<p>ArtisanGet</p>
+							</li>
+							<li>
+								<span class="fa fa-envelope-o" aria-hidden="true"></span>
+								<a href="mailto:contact@artisanget.com">contact@artisanget.com</a>
+							</li>
+							<li>
+								<a href="tel://09076526958"><span class="fa fa-phone" aria-hidden="true"></span>
+								<p>09076526958</p></a>
+							</li>
+							<li>
+								<a href="tel://09031144654"><span class="fa fa-phone" aria-hidden="true"></span>
+								<p>09031144654</p></a>
+							</li>
+						</ul>
+					</div>
+					<div class="col-md-3 col-sm-6 col-xs-6 footer-grid1 res">
+						<h4>services</h4>
+						<ul style="list-style-type: none; padding-left:0;" >
+							<li>
+								<a href="#looking" class="scroll">appliance repair</a>
+							</li>
+							<li>
+								<a href="#looking" class="scroll">home improvement</a>
+							</li>
+							<li>
+								<a href="#looking" class="scroll">home maintenance</a>
+							</li>
+						</ul>
+					</div>
+					
+					<div class="col-md-2 col-sm-6 col-xs-6 footer-grid1">
+						<h4>legal</h4>
+						<ul style="list-style-type: none; padding-left:0;" >
+							<li>
+								<a href="{% url 'terms' %}">privacy policy</a>
+							</li>
+							<!-- <li>
+								<a href="#">licence info</a>
+							</li> -->
+							<li>
+								<a href="{% url 'terms' %}">terms of use</a>
+							</li>
+						</ul>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+				<div class="agileinfo-subscribe-grid text-center">
+					<img src=" {% static "images/mail.png" %} " alt="">
+					<h4>stay upto date with our newsletter!</h4>
+					<p>Sign up to receive helpful Q&A, info on upcoming services and more.</p>
+					<form action="https://artisanget.us4.list-manage.com/subscribe/post?u=4ed2e23db6c7282b0c7794bdd&amp;id=84bbf98b8a" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+	
+						<input type="email" value="" name="EMAIL" class="required email" id="mce-EMAIL" placeholder="email address" required>
+						<!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+						<div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_4ed2e23db6c7282b0c7794bdd_84bbf98b8a" tabindex="-1" value=""></div>
+						<button name="subscribe" id="mc-embedded-subscribe" class="btn1">sign up</button>
+						
+					</form>
+
+					<!-- Begin Mailchimp Signup Form -->
+
+
+
+<!--End mc_embed_signup-->
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="cpy-footer">
+		<div class="container">
+			<div class="footer-top">
+				<div class="logo-nav-left footer-top1">
+					<h2>
+							<a class="navbar-brand" href="{% url 'home' %}">
+							    <img src="{% static "images/artisanget1.png" %}" width="90" height="124" alt="">
+							  </a>
+					</h2>
+				</div>
+				<div class="footer-social">
+					<h4>connect with us</h4>
+					<ul>
+						<li>
+							<a href="http://facebook.com/ArtisanGet" target="_blank">
+								<span class="fa fa-facebook icon_facebook"></span>
+							</a>
+						</li>
+						<li>
+							<a href="http://twitter.com/artisanget" target="_blank">
+								<span class="fa fa-twitter icon_twitter"></span>
+							</a>
+						</li>
+						<li>
+							<a href="http://instagram.com/artisanget" target="_blank">
+								<span class="fa fa-instagram icon_dribbble"></span>
+							</a>
+						</li>
+						<li>
+							<a href="mailto:contact@artisanget.com" target="_blank">
+								<span class="fa fa-google-plus icon_g_plus"></span>
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+		<div class="cpy-text">
+			<p>© {{year}} ArtisanGet. All rights reserved | Designed and Powered by <a href="http://www.twitter.com/YemiTumininu" target="_blank">Yemiemy</a>
+			</p>
+		</div>
+
+	</div>
+<!--//footer  -->
+ <!-- loader -->
+ <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+
+
+	<!-- js -->
+
+	<script src=" {% static "js/jquery-2.2.3.min.js" %} "></script>
+	<!-- //js-->
+	<!--banner-slider-->
+	<script src=" {% static "js/JiSlider.js" %} "></script>
+	<script> 
+		$(window).load(function () {
+			$('#JiSlider').JiSlider({
+				color: '#fff',
+				start: 1,
+				reverse: false
+			}).addClass('ff')
+		});
+	</script>
+	<!-- //banner-slider -->
+	<!--search-bar-->
+	<script src=" {% static "js/main.js" %} "></script>
+	<!--//search-bar-->
+
+
+	<!-- start-smooth-scrolling -->
+	<script  src=" {% static "js/move-top.js" %} "></script>
+	<script  src=" {% static "js/easing.js" %} "></script>
+	<script> 
+		jQuery(document).ready(function ($) {
+			$(".scroll").click(function (event) {
+				event.preventDefault();
+
+				$('html,body').animate({
+					scrollTop: $(this.hash).offset().top
+				}, 1000);
+			});
+		});
+	</script>
+	<!-- //end-smooth-scrolling -->
+	<!-- smooth-scrolling-of-move-up -->
+	<script> 
+		$(document).ready(function () {
+			/*
+			var defaults = {
+				containerID: 'toTop', // fading element id
+				containerHoverID: 'toTopHover', // fading element hover id
+				scrollSpeed: 1200,
+				easingType: 'linear' 
+			};
+			*/
+
+			$().UItoTop({
+				easingType: 'easeOutQuart'
+			});
+
+		});
+	</script>
+
+	<script  src=" {% static "js/SmoothScroll.min.js" %} "></script>
+	<!-- Numscroller -->
+	<script src=" {% static 'js/numscroller-1.0.js' %} "></script>
+	<!-- //Numscroller -->
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src=" {% static "js/bootstrap.js" %} "></script>
+	
+		
+		
+</body>
+
+</html>

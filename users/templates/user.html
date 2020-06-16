@@ -1,0 +1,197 @@
+{% extends 'profile.html' %}
+
+{% block title %}
+  User Profile
+{% endblock title %}
+
+
+{% block active %}
+active
+{% endblock active %}
+
+
+{% block top %}
+  User Profile
+{% endblock top %}
+  
+  
+
+{% block content %}
+  {% load static %}
+  {% load crispy_forms_tags %}
+      <div class="content">
+        {% include 'alerts.html' %}
+        <div class="row">
+          <div class="col-md-8">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="title">Edit Profile</h5>
+              </div>
+              <div class="card-body">
+                <form method="POST" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  <div class="row">
+                    <div class="col-md-3 pr-md-1">
+                           <div id="div_id_username" class="form-group"> <label for="id_username" class=" requiredField">
+                            Username<span class="asteriskField">*</span> </label> 
+                        <input type="text" name="username" value="{{user.username}}" placeholder="Username" maxlength="150" class="textinput textInput form-control" required="" id="id_username">
+                        <small id="hint_id_username" class="form-text text-muted">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</small>
+                      </div>
+                    </div>
+                    <div class="col-md-5 px-md-1"> 
+                      <div id="div_id_image" class="">
+                        <label for="id_image" class=" requiredField">Image </label>
+                        <div class="">
+                        Currently: <a href="{{user.profile.image.url}}">{{user.profile.image}}</a><br>
+                        Change:
+                        <input type="file" name="image" accept="image/*" class="clearablefileinput form-control-file" id="id_image">
+                      </div>
+                    </div>
+                  </div>
+                    <div class="col-md-4 pl-md-1">
+                    <div id="div_id_email" class="form-group"> <label for="id_email" class="">
+                      Email address
+                    </label>
+                        <input type="email" name="email" value="{{user.email}}" placeholder="yourname@example.com" maxlength="254" class="emailinput form-control" id="id_email"> 
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 pr-md-1">
+                       <div id="div_id_first_name" class="form-group"> <label for="id_first_name" class="">
+                        First name
+                      </label>
+                        <input type="text" name="first_name" {% if user.first_name %} value="{{ user.first_name }}" {% endif %} placeholder="Scott" maxlength="30" class="textinput textInput form-control" id="id_first_name">
+                      </div>
+                    </div>
+                    <div class="col-md-6 pl-md-1">
+                       <div id="div_id_last_name" class="form-group"> <label for="id_last_name" class="">
+                        Last name
+                    </label>
+                        <input type="text" name="last_name" {% if user.last_name %} value="{{ user.last_name }}" {% endif %} placeholder="Tito" maxlength="70" class="textinput textInput form-control" id="id_last_name">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div id="div_id_address" class="form-group">
+                        <label for="id_address" class="">
+                          Address
+                      </label>
+                        <input type="text" name="address" placeholder="Home Address" value="{{user.profile.address}}" maxlength="250" class="textinput textInput form-control" id="id_address">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-4 pr-md-1">
+                    <div id="div_id_city" class="form-group"> <label for="id_city" class="">
+                      City
+                    </label>
+                        <input type="text" name="city" placeholder="City" value="{{user.profile.city}}" maxlength="120" class="textinput textInput form-control" id="id_city">
+                      </div>
+                    </div>
+                    <div class="col-md-4 px-md-1">
+                       <div id="div_id_country" class="form-group"> <label for="id_country" class="">
+                        Country
+                    </label>
+                        <input type="text" name="country" value="{{user.profile.country}}" maxlength="120" class="textinput textInput form-control" id="id_country">
+                      </div>
+                    </div>
+                    <div class="col-md-4 pl-md-1">
+                      <div id="div_id_phone" class="form-group"> <label for="id_phone_0" class=" requiredField">
+                      Phone<span class="asteriskField">*</span> </label>
+                        <input type="text" name="phone_0" value="{{user.profile.phone}}" size="13" class="textinput form-control" required="" id="id_phone_0"><span class="phone-field-ext">
+                        <small id="hint_id_phone" class="form-text text-muted">Contact phone number</small>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-8">
+                      <div id="div_id_about_me" class="form-group">
+                        <label for="id_about_me" class="">
+                          About me
+                      </label>
+                        <textarea name="about_me" cols="40" rows="10" class="textarea form-control" id="id_about_me">{{user.profile.about_me}}</textarea>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="text-muted">
+                    <small>You can add your socials here</small>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-3 pr-md-1">
+                           <div id="div_id_facebook" class="form-group"> <label for="id_facebook">
+                            Facebook</label> 
+                            <input type="text" name="facebook" maxlength="150" value="{{user.profile.facebook}}" class="textinput textInput form-control" id="id_facebook">
+                      </div>
+                    </div>
+                    <div class="col-md-5 px-md-1"> 
+                      <div id="div_id_instagram" class="form-group"> 
+                        <label for="id_instagram" class="">
+                        Instagram
+                    </label> 
+                      <input type="text" name="instagram" maxlength="50" value="{{user.profile.instagram}}" class="textinput textInput form-control" id="id_instagram"> 
+                    </div> 
+                  </div>
+                    <div class="col-md-4 pl-md-1">
+                      <div id="div_id_twitter" class="form-group"> <label for="id_twitter" class="">
+                        Twitter
+                    </label> 
+                    <input type="text" name="twitter" maxlength="150" value="{{user.profile.twitter}}" class="textinput textInput form-control" id="id_twitter"> 
+                    </div>
+                    </div>
+                  </div>
+                  <div class="card-footer">
+                    <button type="submit" class="btn btn-fill btn-primary">Save</button>
+                  </div>
+                </form>
+              </div>
+              
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card card-user">
+              <div class="card-body">
+                <p class="card-text">
+                  <div class="author">
+                    <div class="block block-one"></div>
+                    <div class="block block-two"></div>
+                    <div class="block block-three"></div>
+                    <div class="block block-four"></div>
+                    <a href="javascript:void(0)">
+                      <img class="avatar" src=" {{user.profile.image.url}} " alt="profile_img">
+                      <h5 class="title">{{user.first_name}} {{ user.last_name }}</h5>
+                    </a>
+                    <p class="description">
+                      {{user.email}}
+                    </p>
+                  </div>
+                </p>
+                <div class="card-description" style="text-align: center;">
+                  {{user.profile.about_me}}
+                </div>
+              </div>
+              <div class="card-footer">
+                <div class="button-container">
+                  <button class="btn btn-icon btn-round btn-facebook">
+                    <a href="http://facebook.com/{{user.profile.facebook}}" target="_blank">
+                    <i class="fab fa-facebook"></i>
+                  </a>
+                  </button>
+                  <button href="http://twitter.com/{{user.profile.twitter}}" target="_blank" class="btn btn-icon btn-round btn-twitter">
+                    <a href="http://twitter.com/{{user.profile.twitter}}" target="_blank">
+                      <i class="fab fa-twitter"></i>
+                    </a>
+                  </button>
+                  <button class="btn btn-icon btn-round btn-google">
+                    <a href="http://instagram.com/{{user.profile.instagram}}" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                  </a>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+ {% endblock content %}

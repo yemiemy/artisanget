@@ -1,0 +1,37 @@
+{% extends 'ext.html' %}
+
+{% block title %}
+  Error 404
+{% endblock title %}
+
+
+{% block active %}
+active
+{% endblock active %}
+
+
+{% block top %}
+  ERROR
+{% endblock top %}
+  
+  
+
+{% block content %}
+<div class="content">
+    {% include 'alerts.html' %}
+    <div class="row">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="title">Error</h5>
+          </div>
+          <div class="card-body">
+            {{e}}
+            <br>
+            <hr>
+            <a href="{% url 'dashboard' %}" class="btn btn-fill btn-primary">Go to Dashboard</a>
+          </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

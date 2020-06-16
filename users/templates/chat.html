@@ -1,0 +1,127 @@
+{% extends 'profile.html' %}
+
+{% block title %}
+  Chat room
+{% endblock title %}
+
+
+{% block top %}
+Chat
+{% endblock top %}
+
+
+{% block chat %}
+  active
+{% endblock chat %}
+  
+  
+
+{% block content %}
+  {% load static %}
+  {% load crispy_forms_tags %}
+      <div class="content">
+        {% include 'alerts.html' %}
+        <div class="row">
+            
+          <div class="col-md-12">
+            <div class="card card-user">
+              <div class="card-body messages">
+                    <ul id="chat-log">
+                      <!-- <li class="sent">
+                        <p>Hello guys!!</p>
+                      </li>
+                      <li class="replies">
+                        <p>Hello guys!!</p>
+                      </li> -->
+                    </ul>
+              </div>
+              <div class="message-input">
+                <div class="row">
+                  <div class="col-md-11 pr-md-1">
+                <div class="form-group">
+                <input id="chat-message-input" class="form-control " type="text" placeholder="Write your message..." />
+              </div>
+            </div>
+              <div class="col-md-1 pl-md-1">
+                <button id="chat-message-submit" class="btn btn-icon btn-round btn-twitter">
+                  <i class="tim-icons icon-send" aria-hidden="true"></i>
+                </button>
+                </div>
+            </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script src="{% static 'reconnecting-websocket.js' %}"></script>
+      <script>
+        var roomName = {{ room_name_json }};
+        var username = {{ username }};
+    
+        var chatSocket = new ReconnectingWebSocket(
+            'ws://' + window.location.host +
+            '/ws/chat/' + roomName + '/');
+    
+        chatSocket.onopen = function(e) {
+          fetchMessages();
+        }
+    
+        chatSocket.onmessage = function(e) {
+            var data = JSON.parse(e.data);
+            if (data['command'] === 'messages') {
+              for (let i=0; i<data['messages'].length; i++) {
+                createMessage(data['messages'][i]);
+              }
+            } else if (data['command'] === 'new_message'){
+              createMessage(data['message']);
+            }
+        };
+    
+        chatSocket.onclose = function(e) {
+            console.error('Chat socket closed unexpectedly');
+        };
+    
+        document.querySelector('#chat-message-input').onkeyup = function(e) {
+            if (e.keyCode === 13) {  // enter, return
+                document.querySelector('#chat-message-submit').click();
+            }
+        };
+    
+        document.querySelector('#chat-message-submit').onclick = function(e) {
+            var messageInputDom = document.getElementById('chat-message-input');
+            var message = messageInputDom.value;
+            chatSocket.send(JSON.stringify({
+                'command': 'new_message',
+                'message': message,
+                'from': username
+            }));
+    
+            messageInputDom.value = '';
+        };
+    
+        function fetchMessages() {
+          chatSocket.send(JSON.stringify({'command': 'fetch_messages' }));
+        }
+    
+        function createMessage(data) {
+          var author = data['author'];
+          var msgListTag = document.createElement('li');
+          var pTag = document.createElement('p');
+          pTag.textContent = data.content;
+          
+          if (author === username) {
+            msgListTag.className = 'replies';
+          } else {
+            msgListTag.className = 'sent';
+          }
+          msgListTag.appendChild(pTag);
+          document.querySelector('#chat-log').appendChild(msgListTag);
+        }
+    
+    </script>
+
+    
+
+
+ {% endblock content %}

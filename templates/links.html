@@ -1,0 +1,176 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>ArtisanGet | 
+    {% block title %}
+        
+    {% endblock title %}
+        </title>
+	<!-- for-mobile-apps -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<!-- google webmaster -->
+	<meta name="google-site-verification" content="XHZ1Y_p-rCMb8vBfV2OxM7saiZPWmqfStWdSKW5xswo" />
+	<meta name="keywords" content="ArtisanGet - one stop easy service providers. Electrical services, plumbing services, carpentry, furniture making,
+	very good and affordable artisans, artisans next door, friendly artisans, professional artisans, service providers,
+	artisan company, service provider company" />
+
+
+    
+	<!--LINK TO MANIFEST (FOR PWA)-->
+    <link rel="manifest" href="{% static 'manifest.webmanifest' %}">
+    <script> 
+		addEventListener("load", function () {
+			setTimeout(hideURLbar, 0);
+		}, false);
+
+		function hideURLbar() {
+			window.scrollTo(0, 1);
+		}
+    </script>
+   
+
+	<script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: false">
+	</script>
+	<script type="text/javascript">window.dojoRequire(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us4.list-manage.com","uuid":"4ed2e23db6c7282b0c7794bdd","lid":"84bbf98b8a","uniqueMethods":true}) });
+	</script>
+
+
+	<script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/4ed2e23db6c7282b0c7794bdd/f9c154e25b4d19c92a7de4c2f.js");</script>
+
+	<!-- //favicons -->
+	<link href="{% static "images/artisanget.png" %}" rel="icon">
+	<!-- //for-mobile-apps -->
+	<link href=" {% static "css/bootstrap.css" %} " rel="stylesheet" type="text/css" media="all" />	
+	<link href=" {% static "css/bootstrap.min.css" %} " rel="stylesheet" type="text/css" media="all" />	
+	<!--banner slider  -->
+	<link href=" {% static "css/JiSlider.css" %} " rel="stylesheet">
+	<!-- //banner-slider -->
+	<link href=" {% static "css/font-awesome.css" %} " rel="stylesheet" type="text/css" media="all" />
+	<link href=" {% static "css/style.css" %} " rel="stylesheet" type="text/css" media="all" />
+	<link href="//fonts.googleapis.com/css?family=Noto+Serif:400,400i,700,700i" rel="stylesheet">
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900,900i" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
+
+	<script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/4ed2e23db6c7282b0c7794bdd/dd3f54e64d46c62cae15914f5.js");</script>
+
+</head>
+
+<body>
+
+    {% block content %}
+        
+    {% endblock content %}
+<!-- footer -->
+<div class="cpy-footer">
+    <div class="container">
+        <div class="footer-top">
+            <div class="logo-nav-left footer-top1">
+                <h2>
+                        <a class="navbar-brand" href="{% url 'home' %}">
+                            <img src="{% static "images/artisanget1.png" %}" width="90" height="124" alt="">
+                          </a>
+                </h2>
+            </div>
+            <div class="footer-social">
+                <h4>connect with us</h4>
+                <ul>
+                    <li>
+                        <a href="http://facebook.com/ArtisanGet" target="_blank">
+                            <span class="fa fa-facebook icon_facebook"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://twitter.com/artisanget" target="_blank">
+                            <span class="fa fa-twitter icon_twitter"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="http://instagram.com/artisanget" target="_blank">
+                            <span class="fa fa-instagram icon_dribbble"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="mailto:contact@artisanget.com" target="_blank">
+                            <span class="fa fa-google-plus icon_g_plus"></span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+    <div class="cpy-text">
+        <p>© 
+        {% block year %}
+            
+        {% endblock year %}
+             ArtisanGet. All rights reserved | Designed and Powered by <a href="http://www.twitter.com/YemiTumininu" target="_blank">Yemiemy</a>
+        </p>
+    </div>
+
+</div>
+<!--//footer  -->
+<!-- js -->
+
+<script src=" {% static "js/jquery-2.2.3.min.js" %} "></script>
+<!-- //js-->
+<!--banner-slider-->
+<script src=" {% static "js/JiSlider.js" %} "></script>
+<script> 
+    $(window).load(function () {
+        $('#JiSlider').JiSlider({
+            color: '#fff',
+            start: 1,
+            reverse: false
+        }).addClass('ff')
+    });
+</script>
+<!-- //banner-slider -->
+<!--search-bar-->
+<script src=" {% static "js/main.js" %} "></script>
+<!--//search-bar-->
+<!-- start-smooth-scrolling -->
+<script  src=" {% static "js/move-top.js" %} "></script>
+<script  src=" {% static "js/easing.js" %} "></script>
+<script> 
+    jQuery(document).ready(function ($) {
+        $(".scroll").click(function (event) {
+            event.preventDefault();
+
+            $('html,body').animate({
+                scrollTop: $(this.hash).offset().top
+            }, 1000);
+        });
+    });
+</script>
+<!-- //end-smooth-scrolling -->
+<!-- smooth-scrolling-of-move-up -->
+<script> 
+    $(document).ready(function () {
+        /*
+        var defaults = {
+            containerID: 'toTop', // fading element id
+            containerHoverID: 'toTopHover', // fading element hover id
+            scrollSpeed: 1200,
+            easingType: 'linear' 
+        };
+        */
+
+        $().UItoTop({
+            easingType: 'easeOutQuart'
+        });
+
+    });
+</script>
+<script  src=" {% static "js/SmoothScroll.min.js" %} "></script>
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src=" {% static "js/bootstrap.js" %} "></script>
+</body>
+
+</html>

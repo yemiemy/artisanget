@@ -1,0 +1,19 @@
+Dear {{user}},
+
+Your order {{order_id}} has been accepted by an Artisan.
+
+Say Hi to {{accepted_by}}. He is your artsian.
+
+We look forward to serving you more in the future.
+
+Thank you for using ArtisanGet.
+
+Sincerely,
+ArtisanGet
+-reply to: contact@artisanget.com
+
+
+This is an automated system email. Please do not reply to this email.
+
+If you would like to make further enquiry or know more about our services, please reach out to us via contact@artisanget.com or connect with us on all social media platforms @artisanget
+

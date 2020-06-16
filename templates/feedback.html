@@ -1,0 +1,161 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>ArtisanGet | Feedback</title>
+	<!-- for-mobile-apps -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="keywords" content= ""/>
+	<link href="{% static "images/artisanget.png" %}" rel="icon">
+	<script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: false">
+	</script>
+	<script type="text/javascript">window.dojoRequire(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us4.list-manage.com","uuid":"399ae28b6cb92987019477558","lid":"e54980661b","uniqueMethods":true}) });
+	</script>
+	<script> 
+		addEventListener("load", function () {
+			setTimeout(hideURLbar, 0);
+		}, false);
+
+		function hideURLbar() {
+			window.scrollTo(0, 1);
+		}
+	</script>
+	<script id="mcjs">!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/399ae28b6cb92987019477558/952a818a17602cf4b8fa09721.js");</script>
+
+	<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	/* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
+	   We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
+</style>
+
+	<!-- //for-mobile-apps -->
+	<link href=" {% static "css/bootstrap.css" %} " rel="stylesheet" type="text/css" media="all" />
+	<link href=" {% static "css/bootstrap.min.css" %} " rel="stylesheet" type="text/css" media="all" />
+	<!--banner slider  -->
+	<link href=" {% static "css/JiSlider.css" %} " rel="stylesheet">
+	<!-- //banner-slider -->
+	<link href=" {% static "css/font-awesome.css" %} " rel="stylesheet" type="text/css" media="all" />
+	<link href=" {% static "css/style.css" %} " rel="stylesheet" type="text/css" media="all" />
+	<link href="//fonts.googleapis.com/css?family=Noto+Serif:400,400i,700,700i" rel="stylesheet">
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,200i,300,300i,400,400i,600,600i,700,700i,900,900i" rel="stylesheet">
+
+</head>
+
+<body>
+	<!-- header -->
+	<div class="header-m">
+		<div class="container">
+
+			<div class="logo-nav-agileits">
+				<div class="logo-nav-left">
+					<h2>
+							<a class="navbar-brand" href="{% url 'home' %}">
+							    <img src="{% static "images/artisanget1.png" %}" width="90" height="124" alt="">
+							  </a>
+					</h2>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+			<div class="clearfix"> </div>
+			<div class="logo-nav-left1"></div>
+
+<div class="container">
+		<div class="col-md-4 banner-btmg1">
+			<form action="#" method="post" class="banner_form">
+							{% csrf_token %}
+							<div class="sec-left">
+								<h4 class="title-about about text-center">Thank
+					<span>You</span> for your
+					<span>patronage
+					</span>
+				</h4>
+				<br>
+								<label class="contact-form-text">Name</label>
+								<input placeholder="your name " name="name" type="text" required="">
+							</div>
+							<div class="sec-right">
+								<label class="contact-form-text">Email</label>
+								<input placeholder="yourname@example.com " name="email" type="email" required="">
+							</div>
+							<div class="form-tx">
+								<label class="contact-form-text">How was the service?</label>
+								<textarea placeholder="how would you rate the service?" name="rate" required=""></textarea>
+							</div>
+							<div class="form-tx">
+								<label class="contact-form-text">How much were you charged?</label>
+								<input placeholder=" 4000" maxlength="25" name="price" class="form-group" type="number" required="">
+							</div>
+							<div class="form-tx">
+								<label class="contact-form-text">How can we increase our efficiency?</label>
+								<textarea placeholder="what can we do to satisfy you better?" name="efficiency" ></textarea>
+							</div>
+							
+						<div class="clearfix" ></div>
+							<input type="submit" value="Submit">
+						</form>
+					</div>
+				</div>
+<!--//footer  -->
+	<!-- js -->
+
+	<script src=" {% static "js/jquery-2.2.3.min.js" %} "></script>
+	<!-- //js-->
+	<!--banner-slider-->
+	<script src=" {% static "js/JiSlider.js" %} "></script>
+	<script> 
+		$(window).load(function () {
+			$('#JiSlider').JiSlider({
+				color: '#fff',
+				start: 1,
+				reverse: false
+			}).addClass('ff')
+		});
+	</script>
+	<!-- //banner-slider -->
+	<!--search-bar-->
+	<script src=" {% static "js/main.js" %} "></script>
+	<!--//search-bar-->
+	<!-- start-smooth-scrolling -->
+	<script  src=" {% static "js/move-top.js" %} "></script>
+	<script  src=" {% static "js/easing.js" %} "></script>
+	<script> 
+		jQuery(document).ready(function ($) {
+			$(".scroll").click(function (event) {
+				event.preventDefault();
+
+				$('html,body').animate({
+					scrollTop: $(this.hash).offset().top
+				}, 1000);
+			});
+		});
+	</script>
+	<!-- //end-smooth-scrolling -->
+	<!-- smooth-scrolling-of-move-up -->
+	<script> 
+		$(document).ready(function () {
+			/*
+			var defaults = {
+				containerID: 'toTop', // fading element id
+				containerHoverID: 'toTopHover', // fading element hover id
+				scrollSpeed: 1200,
+				easingType: 'linear' 
+			};
+			*/
+
+			$().UItoTop({
+				easingType: 'easeOutQuart'
+			});
+
+		});
+	</script>
+	<script  src=" {% static "js/SmoothScroll.min.js" %} "></script>
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src=" {% static "js/bootstrap.js" %} "></script>
+</body>
+
+</html>

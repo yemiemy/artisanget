@@ -1,0 +1,162 @@
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+	<!-- //header -->
+	<div class="banner-bg2">
+		<div class="banner-info bg3 inner">
+			<h3>one click repair service</h3>
+			<p>repair.&nbsp;improve.&nbsp;maintain</p>
+		</div>
+	</div>
+	<!-- breadcrumbs -->
+	<div class="breadcrumbs-w3l">
+		<div class="container">
+			<span class="breadcrumbs">
+				<a href="{% url 'home' %}">Home</a> |
+				<span>Status</span>
+			</span>
+		</div>
+	</div>
+	<!-- //breadcrumbs -->
+	<!-- track order -->
+
+	<div class="w3ls-section">
+		<div class="container">
+			<div class="register-top">
+				<div class="col-md-5 col-sm-5 register-left">
+					<img src=" {% static "images/order.jpg" %} " alt="" class="img-fluid" />
+				</div>
+				<div class="col-md-7 col-sm-7 register-right">
+					<form action="{% url 'status' %}" method="POST" class="banner_form">
+						{% csrf_token %}
+						<h6>order look up </h6>
+						<div class="sec-right">
+							<label class="contact-form-text">Email</label>
+							<input placeholder="xxx@xx.com " name="email" type="email" required="">
+						</div>
+						<div class="sec-left">
+							<label class="contact-form-text">Registered Mobile no.</label>
+							<input placeholder=" XXXXXX" name="mobile" type="text" required="">
+						</div>
+						<input type="submit" value="Submit">
+					</form>
+					<a href="#register" class="scroll">new user register here</a>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+	</div>
+	<!-- //track order -->
+
+	
+	<!-- register -->
+
+	<div class="w3ls-section banner-single" id="register">
+		<div class="container">
+			<h4 class="main-title">get registered!</h4>
+			<div class="about-inner-main">
+				<div class="col-md-9  w3layouts-reg-form">
+					<p>Please fill your detatils as stated below.</p>
+					<form action="{% url 'account_signup' %}" method="POST"  id="signup_form">
+						{% if form.errors %}
+						{% for field in form %}
+						{% for error in field.errors %}
+						<div class="alert alert-danger alert-dismissible fade show" role="alert">
+					  <span> {{error}} <span>
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						  <span aria-hidden="true">&times;</span>
+						</button>
+						</div>
+						{% endfor %}
+						{% endfor %}
+						{% for error in form.non_field_errors %}
+						<div class="alert alert-danger alert-dismissible fade show" role="alert">
+						  <span> {{error | escape}} <span>
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							  <span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						{% endfor %}
+						{% endif %}
+						{% csrf_token %}
+				
+						<div class="row form-group">
+						<div id="div_id_first_name" class="col-md-12"> 
+						  <label for="id_first_name" class=" contact-form-text requiredField">First name
+						  </label> 
+						  <input type="text" name="first_name" maxlength="30" class="textinput textInput form-control" required="" id="id_first_name"> 
+						</div>
+					  </div>
+				
+					  <div class="row form-group">
+					  <div id="div_id_last_name" class="col-md-12"> 
+						<label for="id_last_name" class=" contact-form-text requiredField">Last name </label> 
+						  <input type="text" name="last_name" maxlength="30" class="textinput textInput form-control" required="" id="id_last_name"> 
+					  </div>
+					</div>
+				
+						<div class="row form-group">
+							  
+						  <div class="col-md-12">
+							<label class="contact-form-text" for="id_username">Username</label> 
+							<input class="form-control" type="text" name="username" placeholder="Username" autofocus="autofocus" minlength="1" maxlength="150" required="" id="id_username">
+							
+						  </div>
+						  </div>
+				
+						  <div class="row form-group">
+							  
+							<div class="col-md-12">
+							  <label class="contact-form-text" for="id_email">E-mail</label> 
+							  <input class="form-control" type="email" name="email" placeholder="E-mail address" required id="id_email">
+							</div>
+							</div>
+				
+							<div class="row form-group">
+							  
+							  <div class="col-md-12">
+								<label class="contact-form-text" for="id_password1">Password</label> 
+								<input class="form-control" type="password" name="password1" placeholder="Password" required="" id="id_password1">
+							  </div>
+							  </div>
+				
+						  <div class="row form-group">
+							  
+						  <div class="col-md-12">
+							<label class="contact-form-text" for="id_password2">Confirm Password</label>
+							<input class="form-control" type="password" name="password2" placeholder="Password (again)" required="" id="id_password2">
+						  </div>
+						  </div>
+						
+						{% if redirect_field_value %}
+						<input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+						{% endif %}
+				
+						<br>
+						<div class="row form-group">
+						  <div class="col-md-12">
+							<input type="submit" value="Sign Up" class="btn btn-primary btn-md"> 
+						  </div>
+						  </div>
+						<span style="color: #fff;">
+						  Already have an account? Then please
+						</span>
+						<a href="{{ login_url }}" class="txt2">
+						  sign in
+						</a>.
+					  </form>
+
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+	</div>
+	<!-- //register -->
+
+{% endblock %}

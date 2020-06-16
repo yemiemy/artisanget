@@ -1,0 +1,21 @@
+<!-- <script>
+
+var headers = new Headers();
+// *** I set the header in order to solve the error above:
+// *** The value is set to "/" because this js is included in html file in upper folder.
+// *** I tried even "../" and many more others values...
+headers.append('Service-Worker-Allowed', '/');
+console.log(headers.get('Service-Worker-Allowed'));
+		//SERVICE WORKER
+if ('serviceWorker' in navigator) {
+	window.addEventListener('load', function() {
+	  navigator.serviceWorker.register('{% url "service-worker" %}').then(function(registration) {
+		// Registration was successful
+		console.log('ServiceWorker registration successful with scope: ', registration.scope);
+	  }, function(err) {
+		// registration failed :(
+		console.log('ServiceWorker registration failed: ', err);
+	  });
+	});
+  }
+	</script> -->

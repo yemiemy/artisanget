@@ -1,0 +1,21 @@
+{% extends "ext.html" %}
+
+{% load i18n %}
+
+{% block title %}{% trans "Social Network Login Failure" %}{% endblock %}
+
+{% block content %}
+<div class="content">
+    {% include 'alerts.html' %}
+    <div class="row">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header">
+            <h2 class="title" style="text-align: center;">{% trans "Social Network Login Failure" %}</h2>
+              <p class="color-black-opacity-5">{% trans "An error occurred while attempting to login via your social network account." %}</p>
+          </div>
+</div>
+</div>
+</div>
+</div>
+{% endblock %}

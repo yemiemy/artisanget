@@ -1,0 +1,1220 @@
+{% extends 'profile.html' %}
+{% block title %}
+  Dashboard
+{% endblock title %}
+
+{% block act %}
+active
+{% endblock act %}
+{% block top %}
+  {{user.username}}'s Dashboard
+{% endblock top %}
+{% block content %}
+  
+{% load humanize %}
+
+
+{% if user.profile.electrician or user.profile.plumber or user.profile.furniture or user.profile.cleaner or user.profile.painter or user.profile.carpenter %}
+
+<!-- ELECTRICIAN DASHBOARD -->
+{% if user.profile.electrician == True %}
+{% if user.profile.is_verified == True  %}
+<div class="content">
+  {% include 'alerts.html' %}
+  <div class="row">
+    <div class="col-lg-4">
+      <div class="card card-tasks">
+        <div class="card-header ">
+          <h6 class="title d-inline">Orders</h6>
+          <p class="card-category d-inline">{{date}} | Press the tick to accept orders</p>
+        </div>
+        <div class="card-body ">
+          <div class="table-full-width table-responsive">
+            <table class="table">
+              <tbody>
+                {% for object in objects %}
+                {% if object.service.name == 'Electrical Services' %}
+                {% if object.accepted == False %}
+                <tr>
+                  <td>
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" value="" checked>
+                        <span class="form-check-sign">
+                          <span class="check"></span>
+                        </span>
+                      </label>
+                    </div>
+                  </td>
+                  <td>
+                    <p class="title">{{object.service}}</p>
+                    <p class="text-muted">{{object.address}}, {{object.date_stamp|naturaltime}}</p>
+                  </td>
+                  <td class="td-actions text-right">
+                    <button type="button" rel="tooltip" title="" class="btn btn-link" data-original-title="Edit Task">
+                      <a href="{% url 'order_accept' object.id %}" title="Accept Order"><i class="tim-icons icon-check-2"></i></a>
+                    </button>
+                  </td>
+                  <!-- <td class="td-actions text-right">
+                    <button type="button" rel="tooltip" title="" class="btn btn-link" data-original-title="Edit Task">
+                      <a href="{% url 'order-delete' object.id %}" title="Decline"><i class="tim-icons icon-simple-remove"></i></a> 
+                    </button>
+                  </td> -->
+                </tr>
+                {% else %}
+                <tr>
+                  <td>
+                    
+                  </td>
+                  <td>
+                    <p class="title">No pending orders.</p>
+                    <p class="text-muted">Stay connected to receive orders as soon as they are placed.</p>
+                  </td>
+                  <td class="td-actions text-right">
+                    
+                  </td>
+                </tr>
+                {% endif %}
+                {% endif %}
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+    <!--accepted orders-->
+    <div class="col-lg-4">
+      <div class="card card-chart card-tasks">
+        <div class="card-header">
+          <h5 class="card-category">Accepted Orders</h5>
+          <h3 class="card-title"><i class="tim-icons icon-delivery-fast text-success"></i> {{acc_count}} <small>accepted order(s)</small></h3>
+        </div>
+        <div class="card-body ">
+          <div class="table-full-width table-responsive">
+            <table class="table">
+              <tbody>
+                {% for object in accepted_orders %}
+                {% if object.service.name == 'Electrical Services' %}
+                {% if object.accepted_by == request.user %}
+                <tr>
+                  <td>
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" value="" checked>
+                        <span class="form-check-sign">
+                          <span class="check"></span>
+                        </span>
+                      </label>
+                    </div>
+                  </td>
+                  <td>
+                    <p class="title"><a href="{% url 'order_accept' object.id %}" style="color:white;">{{object.service}} | Order ID -- {{object.order_id}}</a></p>
+                    <p class="text-muted"><small style="color: #f69707;">accepted <i><small>{{object.date_stamp|naturaltime}}</small></i></small></p>
+                  </td>
+                </tr>
+                {% endif %}
+                {% endif %}
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--End Accepted Orders-->
+    <div class="col-lg-4">
+      <div class="card card-chart card-tasks">
+        <div class="card-header">
+          <h5 class="card-category">Completed Orders</h5>
+          <h3 class="card-title"><i class="tim-icons icon-send text-success"></i> {{completed_count}} <small>completed order(s)</small></h3>
+        </div>
+        <div class="card-body ">
+          <div class="table-full-width table-responsive">
+            <table class="table">
+              <tbody>
+                {% for object in accepted_orders %}
+                {% if object.service.name == 'Electrical Services' %}
+                {% if object.completed_by == request.user %}
+                <tr>
+                  <td>
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" value="" checked>
+                        <span class="form-check-sign">
+                          <span class="check"></span>
+                        </span>
+                      </label>
+                    </div>
+                  </td>
+                  <td>
+                    <p class="title">{{object.service}} | Order ID -- {{object.order_id}}</p>
+                    <p class="text-muted"><small style="color: #f69707;">completed <i><small>{{object.date_stamp|naturaltime}}</small></i></small></p>
+                  </td>
+                </tr>
+                {% endif %}
+                {% endif %}
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% else %}
+<div class="content">
+  <div class="alert alert-warning alert-dismissible text-center mb-0 sticky-top" role="alert">
+    <div class="container">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span></button>
+        <strong>
+           <marquee behavior="scroll" direction="left">Disclaimer:  Your account is not verified yet.</marquee>
+        </strong>
+    </div>
+  </div>
+  <br>
+  {% include 'alerts.html' %}
+  <div class="row">
+    <div class="container" style="text-align: center;">
+    <h1>Your account is still in review.</h1>
+    <h5>You will be able to accept orders once we have completed the review. Stay connected!</h5>
+  </div>
+  </div>
+</div>
+{% endif %}
+{% endif %}
+<!-- //END ELECTRICIAN DASHBOARD -->
+
+<!--PLUMBER DASHBOARD-->
+{% if user.profile.plumber == True %}
+{% if user.profile.is_verified == True  %}
+<div class="content">
+  {% include 'alerts.html' %}
+  <div class="row">
+    <div class="col-lg-4">
+      <div class="card card-tasks">
+        <div class="card-header ">
+          <h6 class="title d-inline">Orders</h6>
+          <p class="card-category d-inline">{{date}} | Press the tick to accept orders</p>
+        </div>
+        <div class="card-body ">
+          <div class="table-full-width table-responsive">
+            <table class="table">
+              <tbody>
+                {% for object in objects %}
+                {% if object.service.name == 'Plumbing Services' %}
+                {% if object.accepted == False %}
+                <tr>
+                  <td>
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" value="" checked>
+                        <span class="form-check-sign">
+                          <span class="check"></span>
+                        </span>
+                      </label>
+                    </div>
+                  </td>
+                  <td>
+                    <p class="title">{{object.service}}</p>
+                    <p class="text-muted">{{object.address}}, {{object.date_stamp|naturaltime}}</p>
+                  </td>
+                  <td class="td-actions text-right">
+                    <button type="button" rel="tooltip" title="" class="btn btn-link" data-original-title="Edit Task">
+                      <a href="{% url 'order_accept' object.id %}" title="Accept Order"><i class="tim-icons icon-check-2"></i></a>
+                    </button>
+                  </td>
+                  <!-- <td class="td-actions text-right">
+                    <button type="button" rel="tooltip" title="" class="btn btn-link" data-original-title="Edit Task">
+                      <a href="{% url 'order-delete' object.id %}" title="Decline"><i class="tim-icons icon-simple-remove"></i></a> 
+                    </button>
+                  </td> -->
+                </tr>
+                {% else %}
+                <tr>
+                  <td>
+                    
+                  </td>
+                  <td>
+                    <p class="title">No pending orders.</p>
+                    <p class="text-muted">Stay connected to receive orders as soon as they are placed.</p>
+                  </td>
+                  <td class="td-actions text-right">
+                    
+                  </td>
+                </tr>
+                {% endif %}
+                {% endif %}
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+    <!--accepted orders-->
+    <div class="col-lg-4">
+      <div class="card card-chart card-tasks">
+        <div class="card-header">
+          <h5 class="card-category">Accepted Orders</h5>
+          <h3 class="card-title"><i class="tim-icons icon-delivery-fast text-success"></i> {{plum_count}} <small>accepted order(s)</small></h3>
+        </div>
+        <div class="card-body ">
+          <div class="table-full-width table-responsive">
+            <table class="table">
+              <tbody>
+                {% for object in accepted_orders %}
+                {% if object.service.name == 'Plumbing Services' %}
+                {% if object.accepted_by == request.user %}
+                <tr>
+                  <td>
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" value="" checked>
+                        <span class="form-check-sign">
+                          <span class="check"></span>
+                        </span>
+                      </label>
+                    </div>
+                  </td>
+                  <td>
+                    <p class="title"><a href="{% url 'order_accept' object.id %}" style="color:white;">{{object.service}} | Order ID -- {{object.order_id}}</a></p>
+                    <p class="text-muted"><small style="color: #f69707;">accepted <i><small>{{object.date_stamp|naturaltime}}</small></i></small></p>
+                  </td>
+                </tr>
+                {% endif %}
+                {% endif %}
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--End Accepted Orders-->
+    <div class="col-lg-4">
+      <div class="card card-chart card-tasks">
+        <div class="card-header">
+          <h5 class="card-category">Completed Orders</h5>
+          <h3 class="card-title"><i class="tim-icons icon-send text-success"></i> {{completed_plum}} <small>completed order(s)</small></h3>
+        </div>
+        <div class="card-body ">
+          <div class="table-full-width table-responsive">
+            <table class="table">
+              <tbody>
+                {% for object in accepted_orders %}
+                {% if object.service.name == 'Plumbing Services' %}
+                {% if object.completed_by == request.user %}
+                <tr>
+                  <td>
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" value="" checked>
+                        <span class="form-check-sign">
+                          <span class="check"></span>
+                        </span>
+                      </label>
+                    </div>
+                  </td>
+                  <td>
+                    <p class="title">{{object.service}} | Order ID -- {{object.order_id}}</p>
+                    <p class="text-muted"><small style="color: #f69707;">completed <i><small>{{object.date_stamp|naturaltime}}</small></i></small></p>
+                  </td>
+                </tr>
+                {% endif %}
+                {% endif %}
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% else %}
+<div class="content">
+  <div class="alert alert-warning alert-dismissible text-center mb-0 sticky-top" role="alert">
+    <div class="container">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span></button>
+        <strong>
+           <marquee behavior="scroll" direction="left">Disclaimer:  Your account is not verified yet.</marquee>
+        </strong>
+    </div>
+  </div>
+  <br>
+  {% include 'alerts.html' %}
+  <div class="row">
+    <div class="container" style="text-align: center;">
+    <h1>Your account is still in review.</h1>
+    <h5>You will be able to accept orders once we have completed the review. Stay connected!</h5>
+  </div>
+  </div>
+</div>
+{% endif %}
+{% endif %}
+<!--//END PLUMBER DASHBOARD-->
+
+<!--FURNITURE DASHBOARD-->
+{% if user.profile.furniture == True %}
+{% if user.profile.is_verified == True  %}
+<div class="content">
+  {% include 'alerts.html' %}
+  <div class="row">
+    <div class="col-lg-4">
+      <div class="card card-tasks">
+        <div class="card-header ">
+          <h6 class="title d-inline">Orders</h6>
+          <p class="card-category d-inline">{{date}} | Press the tick to accept orders</p>
+        </div>
+        <div class="card-body ">
+          <div class="table-full-width table-responsive">
+            <table class="table">
+              <tbody>
+                {% for object in objects %}
+                {% if object.service.name == 'Furniture making' %}
+                {% if object.accepted == False %}
+                <tr>
+                  <td>
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" value="" checked>
+                        <span class="form-check-sign">
+                          <span class="check"></span>
+                        </span>
+                      </label>
+                    </div>
+                  </td>
+                  <td>
+                    <p class="title">{{object.service}}</p>
+                    <p class="text-muted">{{object.address}}, {{object.date_stamp|naturaltime}}</p>
+                  </td>
+                  <td class="td-actions text-right">
+                    <button type="button" rel="tooltip" title="" class="btn btn-link" data-original-title="Edit Task">
+                      <a href="{% url 'order_accept' object.id %}" title="Accept Order"><i class="tim-icons icon-check-2"></i></a>
+                    </button>
+                  </td>
+                  <!-- <td class="td-actions text-right">
+                    <button type="button" rel="tooltip" title="" class="btn btn-link" data-original-title="Edit Task">
+                      <a href="{% url 'order-delete' object.id %}" title="Decline"><i class="tim-icons icon-simple-remove"></i></a> 
+                    </button>
+                  </td> -->
+                </tr>
+                {% else %}
+                <tr>
+                  <td>
+                    
+                  </td>
+                  <td>
+                    <p class="title">No pending orders.</p>
+                    <p class="text-muted">Stay connected to receive orders as soon as they are placed.</p>
+                  </td>
+                  <td class="td-actions text-right">
+                    
+                  </td>
+                </tr>
+                {% endif %}
+                {% endif %}
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+    <!--accepted orders-->
+    <div class="col-lg-4">
+      <div class="card card-chart card-tasks">
+        <div class="card-header">
+          <h5 class="card-category">Accepted Orders</h5>
+          <h3 class="card-title"><i class="tim-icons icon-delivery-fast text-success"></i> {{fur_count}} <small>accepted order(s)</small></h3>
+        </div>
+        <div class="card-body ">
+          <div class="table-full-width table-responsive">
+            <table class="table">
+              <tbody>
+                {% for object in accepted_orders %}
+                {% if object.service.name == 'Furniture making' %}
+                {% if object.accepted_by == request.user %}
+                <tr>
+                  <td>
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" value="" checked>
+                        <span class="form-check-sign">
+                          <span class="check"></span>
+                        </span>
+                      </label>
+                    </div>
+                  </td>
+                  <td>
+                    <p class="title"><a href="{% url 'order_accept' object.id %}" style="color:white;">{{object.service}} | Order ID -- {{object.order_id}}</a></p>
+                    <p class="text-muted"><small style="color: #f69707;">accepted <i><small>{{object.date_stamp|naturaltime}}</small></i></small></p>
+                  </td>
+                </tr>
+                {% endif %}
+                {% endif %}
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--End Accepted Orders-->
+    <div class="col-lg-4">
+      <div class="card card-chart card-tasks">
+        <div class="card-header">
+          <h5 class="card-category">Completed Orders</h5>
+          <h3 class="card-title"><i class="tim-icons icon-send text-success"></i> {{fur_com}} <small>completed order(s)</small></h3>
+        </div>
+        <div class="card-body ">
+          <div class="table-full-width table-responsive">
+            <table class="table">
+              <tbody>
+                {% for object in accepted_orders %}
+                {% if object.service.name == 'Furniture making' %}
+                {% if object.completed_by == request.user %}
+                <tr>
+                  <td>
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" value="" checked>
+                        <span class="form-check-sign">
+                          <span class="check"></span>
+                        </span>
+                      </label>
+                    </div>
+                  </td>
+                  <td>
+                    <p class="title">{{object.service}} | Order ID -- {{object.order_id}}</p>
+                    <p class="text-muted"><small style="color: #f69707;">completed <i><small>{{object.date_stamp|naturaltime}}</small></i></small></p>
+                  </td>
+                </tr>
+                {% endif %}
+                {% endif %}
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% else %}
+<div class="content">
+  <div class="alert alert-warning alert-dismissible text-center mb-0 sticky-top" role="alert">
+    <div class="container">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span></button>
+        <strong>
+           <marquee behavior="scroll" direction="left">Disclaimer:  Your account is not verified yet.</marquee>
+        </strong>
+    </div>
+  </div>
+  <br>
+  {% include 'alerts.html' %}
+  <div class="row">
+    <div class="container" style="text-align: center;">
+    <h1>Your account is still in review.</h1>
+    <h5>You will be able to accept orders once we have completed the review. Stay connected!</h5>
+  </div>
+  </div>
+</div>
+{% endif %}
+{% endif %}
+<!--//END FURNITURE DASHBOARD-->
+
+<!--PAINTER DASHBOARD-->
+{% if user.profile.painter == True %}
+{% if user.profile.is_verified == True  %}
+<div class="content">
+  {% include 'alerts.html' %}
+  <div class="row">
+    <div class="col-lg-4">
+      <div class="card card-tasks">
+        <div class="card-header ">
+          <h6 class="title d-inline">Orders</h6>
+          <p class="card-category d-inline">{{date}} | Press the tick to accept orders</p>
+        </div>
+        <div class="card-body ">
+          <div class="table-full-width table-responsive">
+            <table class="table">
+              <tbody>
+                {% for object in objects %}
+                {% if object.service.name == 'Painting Services' %}
+                {% if object.accepted == False %}
+                <tr>
+                  <td>
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" value="" checked>
+                        <span class="form-check-sign">
+                          <span class="check"></span>
+                        </span>
+                      </label>
+                    </div>
+                  </td>
+                  <td>
+                    <p class="title">{{object.service}}</p>
+                    <p class="text-muted">{{object.address}}, {{object.date_stamp|naturaltime}}</p>
+                  </td>
+                  <td class="td-actions text-right">
+                    <button type="button" rel="tooltip" title="" class="btn btn-link" data-original-title="Edit Task">
+                      <a href="{% url 'order_accept' object.id %}" title="Accept Order"><i class="tim-icons icon-check-2"></i></a>
+                    </button>
+                  </td>
+                  <!-- <td class="td-actions text-right">
+                    <button type="button" rel="tooltip" title="" class="btn btn-link" data-original-title="Edit Task">
+                      <a href="{% url 'order-delete' object.id %}" title="Decline"><i class="tim-icons icon-simple-remove"></i></a> 
+                    </button>
+                  </td> -->
+                </tr>
+                {% else %}
+                <tr>
+                  <td>
+                    
+                  </td>
+                  <td>
+                    <p class="title">No pending orders.</p>
+                    <p class="text-muted">Stay connected to receive orders as soon as they are placed.</p>
+                  </td>
+                  <td class="td-actions text-right">
+                    
+                  </td>
+                </tr>
+                {% endif %}
+                {% endif %}
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+    <!--accepted orders-->
+    <div class="col-lg-4">
+      <div class="card card-chart card-tasks">
+        <div class="card-header">
+          <h5 class="card-category">Accepted Orders</h5>
+          <h3 class="card-title"><i class="tim-icons icon-delivery-fast text-success"></i> {{paint_count}} <small>accepted order(s)</small></h3>
+        </div>
+        <div class="card-body ">
+          <div class="table-full-width table-responsive">
+            <table class="table">
+              <tbody>
+                {% for object in accepted_orders %}
+                {% if object.service.name == 'Painting Services' %}
+                {% if object.accepted_by == request.user %}
+                <tr>
+                  <td>
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" value="" checked>
+                        <span class="form-check-sign">
+                          <span class="check"></span>
+                        </span>
+                      </label>
+                    </div>
+                  </td>
+                  <td>
+                    <p class="title"><a href="{% url 'order_accept' object.id %}" style="color:white;">{{object.service}} | Order ID -- {{object.order_id}}</a></p>
+                    <p class="text-muted"><small style="color: #f69707;">accepted <i><small>{{object.date_stamp|naturaltime}}</small></i></small></p>
+                  </td>
+                </tr>
+                {% endif %}
+                {% endif %}
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--End Accepted Orders-->
+    <div class="col-lg-4">
+      <div class="card card-chart card-tasks">
+        <div class="card-header">
+          <h5 class="card-category">Completed Orders</h5>
+          <h3 class="card-title"><i class="tim-icons icon-send text-success"></i> {{paint_com}} <small>completed order(s)</small></h3>
+        </div>
+        <div class="card-body ">
+          <div class="table-full-width table-responsive">
+            <table class="table">
+              <tbody>
+                {% for object in accepted_orders %}
+                {% if object.service.name == 'Painting Services' %}
+                {% if object.completed_by == request.user %}
+                <tr>
+                  <td>
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" value="" checked>
+                        <span class="form-check-sign">
+                          <span class="check"></span>
+                        </span>
+                      </label>
+                    </div>
+                  </td>
+                  <td>
+                    <p class="title">{{object.service}} | Order ID -- {{object.order_id}}</p>
+                    <p class="text-muted"><small style="color: #f69707;">completed <i><small>{{object.date_stamp|naturaltime}}</small></i></small></p>
+                  </td>
+                </tr>
+                {% endif %}
+                {% endif %}
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% else %}
+<div class="content">
+  <div class="alert alert-warning alert-dismissible text-center mb-0 sticky-top" role="alert">
+    <div class="container">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span></button>
+        <strong>
+           <marquee behavior="scroll" direction="left">Disclaimer:  Your account is not verified yet.</marquee>
+        </strong>
+    </div>
+  </div>
+  <br>
+  {% include 'alerts.html' %}
+  <div class="row">
+    <div class="container" style="text-align: center;">
+    <h1>Your account is still in review.</h1>
+    <h5>You will be able to accept orders once we have completed the review. Stay connected!</h5>
+  </div>
+  </div>
+</div>
+{% endif %}
+{% endif %}
+<!--//END PAINTER DASHBOARD-->
+
+<!--CLEANER DASHBOARD-->
+{% if user.profile.cleaner == True %}
+{% if user.profile.is_verified == True  %}
+<div class="content">
+  {% include 'alerts.html' %}
+  <div class="row">
+    <div class="col-lg-4">
+      <div class="card card-tasks">
+        <div class="card-header ">
+          <h6 class="title d-inline">Orders</h6>
+          <p class="card-category d-inline">{{date}} | Press the tick to accept orders</p>
+        </div>
+        <div class="card-body ">
+          <div class="table-full-width table-responsive">
+            <table class="table">
+              <tbody>
+                {% for object in objects %}
+                {% if object.service.name == 'Cleaning Services' %}
+                {% if object.accepted == False %}
+                <tr>
+                  <td>
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" value="" checked>
+                        <span class="form-check-sign">
+                          <span class="check"></span>
+                        </span>
+                      </label>
+                    </div>
+                  </td>
+                  <td>
+                    <p class="title">{{object.service}}</p>
+                    <p class="text-muted">{{object.address}}, {{object.date_stamp|naturaltime}}</p>
+                  </td>
+                  <td class="td-actions text-right">
+                    <button type="button" rel="tooltip" title="" class="btn btn-link" data-original-title="Edit Task">
+                      <a href="{% url 'order_accept' object.id %}" title="Accept Order"><i class="tim-icons icon-check-2"></i></a>
+                    </button>
+                  </td>
+                  <!-- <td class="td-actions text-right">
+                    <button type="button" rel="tooltip" title="" class="btn btn-link" data-original-title="Edit Task">
+                      <a href="{% url 'order-delete' object.id %}" title="Decline"><i class="tim-icons icon-simple-remove"></i></a> 
+                    </button>
+                  </td> -->
+                </tr>
+                {% else %}
+                <tr>
+                  <td>
+                    
+                  </td>
+                  <td>
+                    <p class="title">No pending orders.</p>
+                    <p class="text-muted">Stay connected to receive orders as soon as they are placed.</p>
+                  </td>
+                  <td class="td-actions text-right">
+                    
+                  </td>
+                </tr>
+                {% endif %}
+                {% endif %}
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+    <!--accepted orders-->
+    <div class="col-lg-4">
+      <div class="card card-chart card-tasks">
+        <div class="card-header">
+          <h5 class="card-category">Accepted Orders</h5>
+          <h3 class="card-title"><i class="tim-icons icon-delivery-fast text-success"></i> {{clean_count}} <small>accepted order(s)</small></h3>
+        </div>
+        <div class="card-body ">
+          <div class="table-full-width table-responsive">
+            <table class="table">
+              <tbody>
+                {% for object in accepted_orders %}
+                {% if object.service.name == 'Cleaning Services' %}
+                {% if object.accepted_by == request.user %}
+                <tr>
+                  <td>
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" value="" checked>
+                        <span class="form-check-sign">
+                          <span class="check"></span>
+                        </span>
+                      </label>
+                    </div>
+                  </td>
+                  <td>
+                    <p class="title"><a href="{% url 'order_accept' object.id %}" style="color:white;">{{object.service}} | Order ID -- {{object.order_id}}</a></p>
+                    <p class="text-muted"><small style="color: #f69707;">accepted <i><small>{{object.date_stamp|naturaltime}}</small></i></small></p>
+                  </td>
+                </tr>
+                {% endif %}
+                {% endif %}
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--End Accepted Orders-->
+    <div class="col-lg-4">
+      <div class="card card-chart card-tasks">
+        <div class="card-header">
+          <h5 class="card-category">Completed Orders</h5>
+          <h3 class="card-title"><i class="tim-icons icon-send text-success"></i> {{clean_com}} <small>completed order(s)</small></h3>
+        </div>
+        <div class="card-body ">
+          <div class="table-full-width table-responsive">
+            <table class="table">
+              <tbody>
+                {% for object in accepted_orders %}
+                {% if object.service.name == 'Cleaning Services' %}
+                {% if object.completed_by == request.user %}
+                <tr>
+                  <td>
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" value="" checked>
+                        <span class="form-check-sign">
+                          <span class="check"></span>
+                        </span>
+                      </label>
+                    </div>
+                  </td>
+                  <td>
+                    <p class="title">{{object.service}} | Order ID -- {{object.order_id}}</p>
+                    <p class="text-muted"><small style="color: #f69707;">completed <i><small>{{object.date_stamp|naturaltime}}</small></i></small></p>
+                  </td>
+                </tr>
+                {% endif %}
+                {% endif %}
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% else %}
+<div class="content">
+  <div class="alert alert-warning alert-dismissible text-center mb-0 sticky-top" role="alert">
+    <div class="container">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span></button>
+        <strong>
+           <marquee behavior="scroll" direction="left">Disclaimer:  Your account is not verified yet.</marquee>
+        </strong>
+    </div>
+  </div>
+  <br>
+  {% include 'alerts.html' %}
+  <div class="row">
+    <div class="container" style="text-align: center;">
+    <h1>Your account is still in review.</h1>
+    <h5>You will be able to accept orders once we have completed the review. Stay connected!</h5>
+  </div>
+  </div>
+</div>
+{% endif %}
+{% endif %}
+<!--//END CLEANER DASHBOARD-->
+
+<!--CLEANER CARPENTER-->
+{% if user.profile.carpenter == True %}
+{% if user.profile.is_verified == True  %}
+<div class="content">
+  {% include 'alerts.html' %}
+  <div class="row">
+    <div class="col-lg-4">
+      <div class="card card-tasks">
+        <div class="card-header ">
+          <h6 class="title d-inline">Orders</h6>
+          <p class="card-category d-inline">{{date}} | Press the tick to accept orders</p>
+        </div>
+        <div class="card-body ">
+          <div class="table-full-width table-responsive">
+            <table class="table">
+              <tbody>
+                {% for object in objects %}
+                {% if object.service.name == 'Carpentry Services' %}
+                {% if object.accepted == False %}
+                <tr>
+                  <td>
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" value="" checked>
+                        <span class="form-check-sign">
+                          <span class="check"></span>
+                        </span>
+                      </label>
+                    </div>
+                  </td>
+                  <td>
+                    <p class="title">{{object.service}}</p>
+                    <p class="text-muted">{{object.address}}, {{object.date_stamp|naturaltime}}</p>
+                  </td>
+                  <td class="td-actions text-right">
+                    <button type="button" rel="tooltip" title="" class="btn btn-link" data-original-title="Edit Task">
+                      <a href="{% url 'order_accept' object.id %}" title="Accept Order"><i class="tim-icons icon-check-2"></i></a>
+                    </button>
+                  </td>
+                  <!-- <td class="td-actions text-right">
+                    <button type="button" rel="tooltip" title="" class="btn btn-link" data-original-title="Edit Task">
+                      <a href="{% url 'order-delete' object.id %}" title="Decline"><i class="tim-icons icon-simple-remove"></i></a> 
+                    </button>
+                  </td> -->
+                </tr>
+                {% else %}
+                <tr>
+                  <td>
+                    
+                  </td>
+                  <td>
+                    <p class="title">No pending orders.</p>
+                    <p class="text-muted">Stay connected to receive orders as soon as they are placed.</p>
+                  </td>
+                  <td class="td-actions text-right">
+                    
+                  </td>
+                </tr>
+                {% endif %}
+                {% endif %}
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+    <!--accepted orders-->
+    <div class="col-lg-4">
+      <div class="card card-chart card-tasks">
+        <div class="card-header">
+          <h5 class="card-category">Accepted Orders</h5>
+          <h3 class="card-title"><i class="tim-icons icon-delivery-fast text-success"></i> {{car_count}} <small>accepted order(s)</small></h3>
+        </div>
+        <div class="card-body ">
+          <div class="table-full-width table-responsive">
+            <table class="table">
+              <tbody>
+                {% for object in accepted_orders %}
+                {% if object.service.name == 'Carpentry Services' %}
+                {% if object.accepted_by == request.user %}
+                <tr>
+                  <td>
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" value="" checked>
+                        <span class="form-check-sign">
+                          <span class="check"></span>
+                        </span>
+                      </label>
+                    </div>
+                  </td>
+                  <td>
+                    <p class="title"><a href="{% url 'order_accept' object.id %}" style="color:white;">{{object.service}} | Order ID -- {{object.order_id}}</a></p>
+                    <p class="text-muted"><small style="color: #f69707;">accepted <i><small>{{object.date_stamp|naturaltime}}</small></i></small></p>
+                  </td>
+                </tr>
+                {% endif %}
+                {% endif %}
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--End Accepted Orders-->
+    <div class="col-lg-4">
+      <div class="card card-chart card-tasks">
+        <div class="card-header">
+          <h5 class="card-category">Completed Orders</h5>
+          <h3 class="card-title"><i class="tim-icons icon-send text-success"></i> {{car_com}} <small>completed order(s)</small></h3>
+        </div>
+        <div class="card-body ">
+          <div class="table-full-width table-responsive">
+            <table class="table">
+              <tbody>
+                {% for object in accepted_orders %}
+                {% if object.service.name == 'Carpentry Services' %}
+                {% if object.completed_by == request.user %}
+                <tr>
+                  <td>
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" value="" checked>
+                        <span class="form-check-sign">
+                          <span class="check"></span>
+                        </span>
+                      </label>
+                    </div>
+                  </td>
+                  <td>
+                    <p class="title">{{object.service}} | Order ID -- {{object.order_id}}</p>
+                    <p class="text-muted"><small style="color: #f69707;">completed <i><small>{{object.date_stamp|naturaltime}}</small></i></small></p>
+                  </td>
+                </tr>
+                {% endif %}
+                {% endif %}
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% else %}
+<div class="content">
+  <div class="alert alert-warning alert-dismissible text-center mb-0 sticky-top" role="alert">
+    <div class="container">
+        <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span></button>
+        <strong>
+           <marquee behavior="scroll" direction="left">Disclaimer:  Your account is not verified yet.</marquee>
+        </strong>
+    </div>
+  </div>
+  <br>
+  {% include 'alerts.html' %}
+  <div class="row">
+    <div class="container" style="text-align: center;">
+    <h1>Your account is still in review.</h1>
+    <h5>You will be able to accept orders once we have completed the review. Stay connected!</h5>
+  </div>
+  </div>
+</div>
+{% endif %}
+{% endif %}
+<!--//END CARPENTER DASHBOARD-->
+
+
+
+{% else %}
+<!-- CUSTOMER DASHBOARD -->
+{% if user.profile.is_customer %}
+<div class="content">
+  {% include 'alerts.html' %}
+  <div class="row">
+    <div class="col-lg-4">
+      <div class="card card-tasks">
+        <div class="card-header ">
+          <h6 class="title d-inline">Orders</h6>
+          <p class="card-category d-inline">{{date}} [<strong>TOTAL ORDERS: {{ord_count}}</strong>] </p>
+        </div>
+        <div class="card-body ">
+          <div class="table-full-width table-responsive">
+            <table class="table">
+              <tbody>
+                {% for object in orders %}
+                <tr>
+                  <td>
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" value="" checked>
+                        <span class="form-check-sign">
+                          <span class="check"></span>
+                        </span>
+                      </label>
+                    </div>
+                  </td>
+                  <td>
+                    <p class="title">{{object.service}}</p>
+                    <p class="text-muted">{{object.address}}, {{object.date_stamp|naturaltime}}</p>
+                  </td>
+                  {% if object.completed %}
+                  {% else %}
+                  <td class="td-actions text-right">
+                    <button type="button" rel="tooltip" title="" class="btn btn-link" data-original-title="Edit Task">
+                      <a href="{% url 'track-status' %}" title="Track Order"><i class="tim-icons icon-zoom-split"></i></a>
+                    </button>
+                  </td>
+                  <td class="td-actions text-right">
+                    <button type="button" rel="tooltip" title="" class="btn btn-link" data-original-title="Edit Task">
+                      <a href="{% url 'order-delete' object.id %}" title="Delete Order"><i class="tim-icons icon-trash-simple"></i></a> 
+                    </button>
+                  </td>
+                  {% endif %}
+                </tr>
+                {% if object.accepted %}
+                {% if not object.price_by_customer %}
+                <tr>
+                  <td>
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" value="" checked>
+                        <span class="form-check-sign">
+                          <span class="check"></span>
+                        </span>
+                      </label>
+                    </div>
+                  </td>
+                  <td>
+                    <form method="POST">
+                      {% csrf_token %}
+                      <div class="row">
+                        <div class="col-md-12">
+                          <input type="number" name="price" min="2" max="90000000" class="textinput form-control" required="" >
+                          <small class="text-muted">Please input the workmanship fee agreed with the artisan.</small>
+                        </div>
+                      </div>
+                  </td>
+                  <td class="td-actions text-right">
+                      <button type="submit" title="Send" class="btn btn-link">
+                        <i class="tim-icons icon-check-2"></i>
+                      </button>
+                    </form>
+                    
+                  </td>
+                </tr>
+                {% endif %}
+                {% endif %}
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+    <!--accepted orders-->
+    <div class="col-lg-4">
+      <div class="card card-chart card-tasks">
+        <div class="card-header">
+          <h5 class="card-category">Processing Orders</h5>
+          <h3 class="card-title"><i class="tim-icons icon-delivery-fast text-success"></i> {{pro_count}} <small>processing order(s)</small></h3>
+        </div>
+        <div class="card-body ">
+          <div class="table-full-width table-responsive">
+            <table class="table">
+              <tbody>
+                {% for object in orders %}
+                {% if object.processing %}
+                <tr>
+                  <td>
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" value="" checked>
+                        <span class="form-check-sign">
+                          <span class="check"></span>
+                        </span>
+                      </label>
+                    </div>
+                  </td>
+                  <td>
+                    <p class="title">{{object.service}} | Order ID -- {{object.order_id}}</p>
+                    <p class="text-muted"><small style="color: #f69707;">Processing <i><small>{{object.date_stamp|naturaltime}}</small></i></small></p>
+                  </td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--End Accepted Orders-->
+    <div class="col-lg-4">
+      <div class="card card-chart card-tasks">
+        <div class="card-header">
+          <h5 class="card-category">Completed Orders</h5>
+          <h3 class="card-title"><i class="tim-icons icon-send text-success"></i> {{com_count}} <small>completed order(s)</small></h3>
+        </div>
+        <div class="card-body ">
+          <div class="table-full-width table-responsive">
+            <table class="table">
+              <tbody>
+                {% for object in orders %}
+                {% if object.completed %}
+                <tr>
+                  <td>
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" value="" checked>
+                        <span class="form-check-sign">
+                          <span class="check"></span>
+                        </span>
+                      </label>
+                    </div>
+                  </td>
+                  <td>
+                    <p class="title">{{object.service}} | Order ID -- {{object.order_id}}</p>
+                    <p class="text-muted"><small style="color: #f69707;">completed <i><small>{{object.date_stamp|naturaltime}}</small></i></small></p>
+                  </td>
+                </tr>
+                {% endif %}
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}
+<!-- //END CUSTOMER DASHBOARD -->
+{% endif %}
+{% endblock content %}

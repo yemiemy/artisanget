@@ -1,0 +1,154 @@
+{% extends 'profile.html' %}
+
+{% block title %}
+  Make money as an artisan providing services to others.
+{% endblock title %}
+
+
+{% block artisan %}
+active
+{% endblock artisan %}
+
+
+{% block top %}
+SIGN UP AS AN ARTISAN
+{% endblock top %}
+  
+  
+
+{% block content %}
+  {% load static %}
+  {% load crispy_forms_tags %}
+      <div class="content">
+        {% include 'alerts.html' %}
+        <div class="row">
+          <div class="col-md-8">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="title">Do more with your account as an Artisan</h5>
+                <small class="text-muted">Have you got that service providing skill?👨‍🔧👨‍🚒 Do you want to make more money by providing services to others?💷💰 
+
+                     If you are any of these things above, do well to fill the form below. </small>
+              </div>
+              <div class="card-body">
+                <form method="POST" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  <div class="row">
+                    <div class="col-md-6 pr-md-1">
+                        <div id="div_id_skill" class="form-group"> <label for="id_skill" class="">
+                            What skill do you have?
+                        </label>
+                        <select name="skill" class="select form-control" id="id_skill"> 
+                            <option value="" selected="">---------</option> 
+                            {% for object in skills %}
+                            <option style="color: #000;" value="{{object.id}}">{{object}}</option>
+                            {% endfor %}
+                     </select> 
+                    </div> 
+                    </div>
+                    <div class="col-md-6 pl-md-1">
+                        <div id="div_id_experience" class="form-group"> <label for="id_experience" class="">
+                            How many years of experience do you have?
+                        </label> 
+                        <input type="text" name="experience" maxlength="120" class="textinput textInput form-control" id="id_experience"> 
+                        </div> 
+                    </div>
+                  </div>
+                  <div class="row">
+                    
+                    <div class="col-md-8 pr-md-1">
+                        <div id="div_id_time_conscious" class="form-group"> <label for="id_time_conscious" class="">
+                            Are you Time conscious?
+                        </label>
+                        <select name="time_conscious" class="nullbooleanselect form-control" id="id_time_conscious"> 
+                            <option style="color: #000;" value="unknown" selected="">Unknown</option> 
+                            <option style="color: #000;" value="true">Yes</option> 
+                            <option style="color: #000;" value="false">No</option>
+            
+                    </select> 
+                </div>
+                    </div>
+                    
+                    <div class="col-md-2 px-md-1"> 
+                        <div id="div_id_proficiency" class="form-group"> <label for="id_proficiency" class="">
+                            Proficiency
+                        </label> 
+                        <small id="hint_id_phone" class="form-text text-muted">What is your proficiency level?</small> 
+                        <input type="number" name="proficiency" max="5" min="0" class="numberinput form-control" id="id_proficiency"> 
+                        <small id="hint_id_phone" class="form-text text-muted"><strong>1: Novice | 5: Highly Proficient</strong></small>     
+                    </div> 
+                  </div>
+                  
+                  <div class="col-md-2 pl-md-1">
+                    <div id="div_id_efficiency" class="form-group"> <label for="id_efficiency" class="">
+                        Efficiency
+                    </label> 
+                    <small id="hint_id_phone" class="form-text text-muted">What is your level of efficiency?</small>
+                    <input type="number" name="efficiency" max="5" min="0" class="numberinput form-control" id="id_efficiency"> 
+                    <small id="hint_id_phone" class="form-text text-muted"><strong>1: Not efficient | 5: Highly efficient</strong></small>  
+                </div> 
+                </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                        <div id="div_id_standout" class="form-group"> <label for="id_standout" class="">
+                            What makes you standout from others providing the same service as you?
+                        </label> 
+                        <input type="text" name="standout" maxlength="250" class="textinput textInput form-control" id="id_standout"> 
+                        </div>
+                    </div>
+                  </div>
+                  <div class="card-footer">
+                    <button type="submit" class="btn btn-fill btn-primary">Apply</button>
+                  </div>
+                </form>
+              </div>
+              
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card card-user">
+              <div class="card-body">
+                <p class="card-text">
+                  <div class="author">
+                    <div class="block block-one"></div>
+                    <div class="block block-two"></div>
+                    <div class="block block-three"></div>
+                    <div class="block block-four"></div>
+                    <a href="javascript:void(0)">
+                      <img class="avatar" src=" {{user.profile.image.url}} " alt="profile_img">
+                      <h5 class="title">{{user.first_name}} {{ user.last_name }}</h5>
+                    </a>
+                    <p class="description">
+                      {{user.email}}
+                    </p>
+                  </div>
+                </p>
+                <div class="card-description" style="text-align: center;">
+                  {{user.profile.about_me}}
+                </div>
+              </div>
+              <div class="card-footer">
+                <div class="button-container">
+                  <button class="btn btn-icon btn-round btn-facebook">
+                    <a href="http://facebook.com/{{user.profile.facebook}}" target="_blank">
+                    <i class="fab fa-facebook"></i>
+                  </a>
+                  </button>
+                  <button href="http://twitter.com/{{user.profile.twitter}}" target="_blank" class="btn btn-icon btn-round btn-twitter">
+                    <a href="http://twitter.com/{{user.profile.twitter}}" target="_blank">
+                      <i class="fab fa-twitter"></i>
+                    </a>
+                  </button>
+                  <button class="btn btn-icon btn-round btn-google">
+                    <a href="http://instagram.com/{{user.profile.instagram}}" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                  </a>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+ {% endblock content %}

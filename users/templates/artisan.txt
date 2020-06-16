@@ -1,0 +1,9 @@
+Good day, My name is {{name}}.
+
+I just applied as an artisan. My skill is {{skill}}.
+
+Please verify my account. 
+
+Thanks!
+
+-reply to: {{email}}

@@ -1,0 +1,13 @@
+Good day, I am  {{ name }}.
+
+My name is {{name}}.
+
+I was charged {{price}} for the service.
+
+My rating: {{rate}}
+
+{{efficiency}}
+
+Thank you!
+
+-reply to: {{email}}

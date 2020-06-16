@@ -1,0 +1,304 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+	<!-- banner -->
+	<div class="banner-silder">
+		<div id="JiSlider" class="jislider">
+			<ul>
+				<li>
+					<div class="banner-top banner-top1">
+						<div class="container">
+							<div class="banner-info info2">
+								<h3>one stop home and campus services</h3>
+								<p>let us do it for you.</p>
+
+							</div>
+						</div>
+					</div>
+				</li>
+
+
+				<li>
+					<div class="banner-top banner-top2">
+						<div class="container">
+							<div class="banner-info bg3 info2">
+								<h3>one click repair service</h3>
+								<p>repair.&nbsp;improve.&nbsp;maintain</p>
+							</div>
+
+						</div>
+					</div>
+				</li>
+				<li>
+					<div class="banner-top banner-top3">
+						<div class="container">
+							<div class="banner-info bg3">
+								<h3>Property Maintenance Services</h3>
+								<p>one call does it all.</p>
+							</div>
+
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<!-- //banner -->
+		<!-- banner bottom -->
+		<div class="banner-btm">
+			<div class="container">
+				<div class="banner-bottom-main">
+					<div class="col-md-4 banner-btmg1">
+
+						<div class="form-text" id="looking">
+							<h3>Looking for a Handyman?</h3>
+							<p>We solve your Home repair needs!</p>
+						<!--	<img src=" {% static "images/f1.png" %} " alt="" /> -->
+						</div>
+						<form method="post" class="banner_form">
+							{% csrf_token %}
+							<div class="sec-left">
+								<label class="contact-form-text">Name</label>
+								<input placeholder="your name " name="name" type="text" required="">
+							</div>
+							<div class="sec-right">
+								<label class="contact-form-text">Email</label>
+								<input placeholder="yourname@xx.com " name="email" type="email" required="">
+							</div>
+							<div class="sec-right">
+								<label class="contact-form-text">Mobile no.</label>
+								<input placeholder="08123456789" maxlength="11" name="mobile" type="tel" required="">
+							</div>
+							<div class="form-tx">
+								<label class="contact-form-text">Address</label>
+								<textarea placeholder="your address" name="address" required=""></textarea>
+							</div>
+						<div class="form-tx sec-right">
+							<label class="contact-form-text" for="id_city">City</label>
+							<input placeholder="city" maxlength="120" name="city" type="text" id="id_city" required="">
+						</div>
+						<div class="form-tx sec-right">
+							<label class="contact-form-text" for="id_state">State</label>
+							<input placeholder="state" maxlength="120" name="state" type="text" id="id_state" required="">
+						</div>
+							<div class="form-select sec-left">
+							<label class="contact-form-text">Select Service</label>
+							<select name="service" required="">
+								{% for object in services %}
+								<option value={{object.id}}>{{object.name}}</option>
+								{% endfor %}
+							</select>
+						</div>
+						<div class="form-tx">
+							<label class="contact-form-text">Please provide job description</label>
+							<textarea placeholder="job description" name="description" required=""></textarea>
+						</div>
+						<div class="clearfix" ></div>
+							<div class="wthree-text">
+							<ul>
+								<li>
+									<label class="anim">
+										<input type="checkbox" name="accept" value="True" required="" class="checkbox">
+										<span> I accept the <a href="{% url 'terms' %}">terms and conditions</a></span>
+									</label>
+								</li>
+							</ul>
+							<div class="clearfix"> </div>
+						</div>
+							<input type="submit" value="Submit">
+						</form>
+					</div>
+					<div class="col-md-8 banner-btm-grid2">
+						<div class="col-md-4 banner-grid2">
+							<div class="banner-subg1">
+								<h3>maintenance</h3>
+								<p>The condition of your homes and rooms are paramount to us we ensure good maintenance of homes and properties.</p>
+								<span class="fa fa-cog" aria-hidden="true"></span>
+								<div class="read-btn">
+									<a href="{% url 'service' %}">view more</a>
+								</div>
+							</div>
+							<div class="banner-subg1">
+								<h3>cleaning</h3>
+								<p> removing unwanted substances, such as dirt, infectious agents, and other impurities, from an object or environment.</p>
+								<span class="fa fa-check-square-o" aria-hidden="true"></span>
+								<div class="read-btn">
+									<a href="{% url 'service' %}">view more</a>
+								</div>
+							</div>
+
+						</div>
+						<div class="col-md-4 banner-grid2">
+							<div class="banner-subg1">
+								<h3>Repair</h3>
+								<p>Repair your worn out parts clothes, laptops, machines and all.</p>
+								<span class="fa fa-yelp" aria-hidden="true"></span>
+								<div class="read-btn">
+									<a href="{% url 'service' %}">view more</a>
+								</div>
+							</div>
+							<div class="banner-subg1">
+								<h3>improvement</h3>
+								<p>proper improvement of parts increases efficiency and we provide optimum improvement services.</p>
+								<span class="fa fa-gg" aria-hidden="true"></span>
+								<div class="read-btn">
+									<a href="{% url 'service' %}">view more</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>
+		</div>
+		<!-- //banner bottom -->
+
+		<!-- inner-banner-bottom -->
+	<div class="w3ls-section">
+		<div class="container">
+			<div class="col-md-6 inner-banner">
+				<h4 class="title-about about text-center">Do You Have A 
+					<span>hand</span> 
+					<span>Work?
+					</span><br><br>
+					<span style="border:solid 1px;  padding:10px 30px 10px 30px; color:#060605; "><a href="https://bit.ly/applyAsAServiceProvider" class="join" target="_blank"> 
+					Join for free</a></span>
+				</h4>
+			</div>
+			<div class="col-md-6 inner-main-bg">
+				<div class="inner-bg-layer"></div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+	<div class="w3ls-section">
+		<div class="container">
+			<div class="col-md-6 inner-banner">
+			<h4 class="title-about about text-center">
+				How It <span>Works</span> For <span>Service Providers</span>
+			</h4>
+			</div>
+			<div class="col-md-6">
+				<div class="inner-bg-layer">
+					<div class="about-grid">
+					<div class="about-bottom-right">
+						<div class="abouthome-grid">
+							<span class="hi-icon hi-icon-archive fa fa-briefcase"> </span>
+						</div>
+						<div class="about-bottom">
+							<h3>Create A Free Profile</h4>
+							<p>Sign up as a service provider using this <a href="https://bit.ly/applyAsAServiceProvider" target="_blank">link.</a> You will be able to receive job alerts.</p>
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+					<div class="about-bottom-right">
+						<div class="abouthome-grid">
+							<span class="hi-icon hi-icon-archive  fa fa-link"> </span>
+						</div>
+						<div class="about-bottom">
+							<h3>Connect With Customers</h4>
+							<p>Receive job alerts and visit the customers' location to provide the service.</p>
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+				</div>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+	<!-- //inner-banner-bottom -->
+		<!-- about -->
+		<div class="agile-about-main">
+			<div class="col-md-4 about-left">
+				<div class="about-main-bg text-center">
+					<h4 class="about-title">Why</h4>
+					<h4 class="sub">
+						<span>c</span>hoose
+						<span>u</span>s?</h4>
+				</div>
+			</div>
+			<div class="col-md-8 about-bottom-g1">
+				<h4>One Stop Solution for your Complete Home Maintenance</h4>
+				<!-- <h4>get easy home repairs and upgrades with professional home service providers</h4> your complete home solution.-->
+				<div class="about-grid">
+					<div class="about-bottom-right">
+						<div class="abouthome-grid">
+							<span class="hi-icon hi-icon-archive fa fa-check"> </span>
+						</div>
+						<div class="about-bottom">
+							<h5>vision</h5>
+							<p>To provide good and efficient home services and on campus services.</p>
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+					<div class="about-bottom-right">
+						<div class="abouthome-grid">
+							<span class="hi-icon hi-icon-archive  fa fa-money"> </span>
+						</div>
+						<div class="about-bottom">
+							<h5>affordable</h5>
+							<p>Good and improved home services at affordable prices. </p>
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+					<div class=" about-bottom-right">
+						<div class="abouthome-grid">
+							<span class="hi-icon hi-icon-archive fa fa-photo"> </span>
+						</div>
+						<div class="about-bottom">
+							<h5>quality</h5>
+							<p>Great Acccessibilty for quality control. </p>
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+					<div class=" about-bottom-right">
+						<div class="abouthome-grid">
+							<span class="hi-icon hi-icon-archive fa fa-briefcase"> </span>
+						</div>
+						<div class="about-bottom">
+							<h5>24*7 support</h5>
+							<p>Any time Any day support all day</p>
+						</div>
+						<div class="clearfix"> </div>
+					</div>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+
+			<div class="clearfix"></div>
+		</div>
+	</div>
+	<!-- //about -->
+	<!--  about bottom -->
+	<div class="w3ls-section">
+		<div class="container">
+			<div class="main-bottom">
+				<div class="col-md-6 col-sm-6 mb-left">
+
+				</div>
+				<div class="col-md-6 col-sm-6 mb-right" style="padding-bottom:53px;">
+					<h4>service you can trust</h4>
+					<p>protect all your home appliances & systems.</p>
+					<a href="{% url 'service' %}">view all services</a>
+					<br>
+					<hr>
+					{% if user.is_authenticated %}
+					<b></b> 
+					{% else %}
+					<b>Become a VIP customer today.</b> <a href="{% url 'account_signup' %}" class="btn btn-primary">SIGN UP</a>
+					{% endif %}
+				</div>
+
+			</div>
+		</div>
+		<div class="clearfix"></div>
+	</div>
+	<div class="clearfix"></div>
+	<div class="breadcrumbs-w3l">
+		<div class="container" style="text-align:center;">
+				<h4><b>BYPASSING ARTISANGET TO CONDUCT BUSINESS DIRECTLY WITH SERVICE PROVERS IS AT USERS RISK</b></h4>
+		</div>
+	</div>
+	<br>
+	<!--  //about bottom -->
+{% endblock %}
